@@ -1,0 +1,39 @@
+﻿
+#confirmAndAsk,#ask,.reply
+{
+    background-color: #ead;
+    color: white;
+    text-decoration: none;
+    padding: 20px 10px;
+    display: inline-block;
+}
+
+#shareOnCircle, #follow
+{
+    background-color: #6ad;
+    color: white;
+    text-decoration: none;
+    padding: 20px 10px;
+    display: inline-block;
+}
+
+#loading {
+    width: 120px;
+    background: rgba(0,0,0,0.8);
+    border-radius: 10px;
+    position: absolute;
+    position: fixed;
+    top:30%;
+    left: 50%;
+    margin-left: -70px;
+    z-index: 99;
+    text-align: center;
+    color: #fff;
+    padding: 10px;
+    display: none;
+}
+
+#loading-info em {
+    color: #ffd800;
+    font-style: normal;
+}

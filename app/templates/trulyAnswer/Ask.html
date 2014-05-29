@@ -1,0 +1,40 @@
+﻿<div>
+    <div class="userIcon">
+        <img src='{{headImageUrl}}' />
+    </div>
+    <div>
+        {{userName}}有问必答
+    </div>
+</div>
+<div>
+{{expiresAt}}前提问，{{userName}}有问必答
+</div>
+<hr />
+{{#yourAnswer}}
+你的问题：<br />
+<b>{{userAnswerText}}</b>
+<br />
+    {{#repliedByUserAnswers}}
+        <div>{{userAnswerText}}</div>
+    {{/repliedByUserAnswers}}
+    {{^repliedByUserAnswers}}
+        等待回答
+    {{/repliedByUserAnswers}}
+{{/yourAnswer}}
+
+{{^yourAnswer}}
+    <div>
+        <textarea id="newUserAnswer"></textarea>
+        <a id="ask" href="javascript:void(0)" >就问这个了</a>
+    </div>
+{{/yourAnswer}}
+<hr />
+
+<div>
+    所有问题
+    <div id="userAnswerWrapper">
+    {{#userAnswers}}
+        {{> userAnswer}}
+    {{/userAnswers}}
+    </div>
+</div>
