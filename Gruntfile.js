@@ -24,7 +24,7 @@ module.exports = function (grunt) {
       release: {
         options: {
           mainConfigFile: "app/config.js",
-          generateSourceMaps: true,
+          generateSourceMaps: false,
           include: ["main"],
           out: "dist/source.min.js",
           optimize: "uglify2",
@@ -67,7 +67,7 @@ module.exports = function (grunt) {
 
         // Rewrite image paths during release to be relative to the `img`
         // directory.
-        forceRelative: "/app/img/"
+        forceRelative: ""
       }
     },
 

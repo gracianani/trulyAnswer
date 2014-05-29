@@ -55,7 +55,7 @@ define(function (require, exports, module) {
             user.fetchDataByUserId({
                 userId: userId,
                 success: function () {
-                    if (shareCode !== undefined && shareCode != null) {
+                    if (shareCode !== undefined && shareCode !== null) {
                         Backbone.history.navigate("#ask/" + shareCode, { trigger: true, replace: true });
                     }
                     else {

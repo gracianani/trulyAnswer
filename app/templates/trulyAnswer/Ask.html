@@ -1,6 +1,7 @@
-﻿<div>
+﻿<div class="container">
+<div>
     <div class="userIcon">
-        <img src='{{headImageUrl}}' />
+        <img src='{{headImageUrl}}' class="img-circle user-avatar" />
     </div>
     <div>
         {{userName}}有问必答
@@ -25,7 +26,7 @@
 {{^yourAnswer}}
     <div>
         <textarea id="newUserAnswer"></textarea>
-        <a id="ask" href="javascript:void(0)" >就问这个了</a>
+        <a id="ask" class="btn btn-default" href="javascript:void(0)" >就问这个了</a>
     </div>
 {{/yourAnswer}}
 <hr />
@@ -37,4 +38,5 @@
         {{> userAnswer}}
     {{/userAnswers}}
     </div>
+</div>
 </div>
