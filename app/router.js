@@ -46,7 +46,7 @@ define(function (require, exports, module) {
             "simpleQuestion/report/:shareCode": "simpleQuestionReport",
             "simpleQuestion/ask/:shareCode": "simpleQuestionAsk",
 
-            "login/:userId(/:shareCode)": "login"
+            "login/:userId(/:shareCode)(/:questionTypeId)": "login"
         },
 
         index: function () {
@@ -91,14 +91,24 @@ define(function (require, exports, module) {
             simpleQuestionAskView = new SimpleQuestionAskView({ shareCode: shareCode, user: user });
         },
 
-        login: function (userId, shareCode) {
+        login: function (userId, shareCode, questionTypeId) {
             prepareView.render();
             user.setUserId(userId);
             user.fetchDataByUserId({
                 userId: userId,
                 success: function () {
                     if (shareCode !== undefined && shareCode !== null) {
-                        Backbone.history.navigate("#ask/" + shareCode, { trigger: true, replace: true });
+                        switch (questionTypeId) {
+                            case 1:
+                                Backbone.history.navigate("trulyAnswer/ask/" + shareCode, { trigger: true, replace: true });
+                                return;
+                            case 3:
+                                Backbone.history.navigate("shareStory/ask/" + shareCode, { trigger: true, replace: true });
+                                return;
+                            default:
+                                Backbone.history.navigate("", { trigger: true, replace: true });
+                                return;
+                        }
                     }
                     else {
                         Backbone.history.navigate("", { trigger: true, replace: true });

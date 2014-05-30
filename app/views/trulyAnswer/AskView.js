@@ -18,7 +18,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
                     {
                         success: function (data) {
                             if (data.userId == options.user.get("userId")) {
-                                Backbone.history.navigate("#/trulyAnswer/reply/" + options.shareCode, { trigger: true, replace: true });
+                                Backbone.history.navigate("trulyAnswer/reply/" + options.shareCode, { trigger: true, replace: true });
                             }
                             else {
                                 self.question.set(data);
@@ -57,7 +57,8 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
                 var self = this;
                 var ask = new UserAnswer({
                     "userId": this.user.get("userId"),
-                    "questionId": this.question.get("questionId"),
+                    "questionTypeId" : this.question.get("questionTypeId"),
+                    "questionShareCode": this.question.get("shareCode"),
                     "userAnswerText": this.userAnswerText
                 });
                 ask.addAnswer({

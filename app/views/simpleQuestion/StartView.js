@@ -44,7 +44,7 @@ define(["jquery", "backbone", "mustache", "text!templates/simpleQuestion/Start.h
                 this.question.set("expiresIn", expiresIn);
                 this.question.addQuestion({
                     success: function (data) {
-                        Backbone.history.navigate("#/simpleQuestion/report/" + data.shareCode, { trigger: true, replace: true });
+                        Backbone.history.navigate("simpleQuestion/report/" + data.shareCode, { trigger: true, replace: true });
                     },
                     error: function (msg) {
                         alert(msg);

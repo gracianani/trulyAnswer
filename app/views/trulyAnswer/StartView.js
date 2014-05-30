@@ -63,12 +63,13 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
                 this.question.set("expiresIn", expiresIn);
                 this.question.addQuestion({
                     success: function (data) {
-                    
+             
                         self.showSuccessInfo();
                         self.shareCode = data.shareCode;
                         
                         Backbone.history.navigate("trulyAnswer/reply/" + data.shareCode, { trigger: false, replace: true });
                         
+
                     },
                     error: function (msg) {
                         alert(msg);
