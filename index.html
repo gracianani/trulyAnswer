@@ -8,7 +8,7 @@
   <title>秘密 有问必答</title>
 
   <!-- Application styles. -->
-  <!-- build:[href] styles.min.css?v=1.10 -->
+  <!-- build:[href] /styles.min.css?v=1.10 -->
   <link rel="stylesheet" href="/app/styles/index.css">
   <!-- /build -->
 </head>
@@ -19,18 +19,17 @@
     <div id="stage"></div>
   </main>
   <div id="loading">
-    <div class="icon-loading fastRotate"></div>
-    <div id="loading-info">秘密在努力的加载<br /> (ง •̀_•́)ง</div>
+    <div class="loading-img"><img src="app/img/logo-foxhole.gif" /></div>
+    <div class="loading-info">秘密在努力的加载<br /> (ง •̀_•́)ง</div>
   </div><!-- loading -->
   <script>
       document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
           WeixinJSBridge.call('showOptionMenu');
           document.getElementsByTagName('body')[0].setAttribute("class", "wechat");
-          WeixinJSBridge.call('showOptionMenu');
       });
   </script>
   <!-- Application source. -->
-  <!-- build:[src] source.min.js?v=1.43-->
+  <!-- build:[src] /source.min.js?v=1.41-->
   <script data-main="/app/main" src="/vendor/bower/requirejs/require.js"></script>
   <!-- /build -->
 </body>

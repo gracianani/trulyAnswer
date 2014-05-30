@@ -1,15 +1,16 @@
-﻿<div>
+﻿<div class="container">
+<div>
     快成功了，还剩两步：
     1. 把问题分享到朋友圈， 让朋友匿名回复
     2. 关注秘密公众账号，查看朋友的回复
 </div>
 <div id="reply-action">
-    <a href="javascript:void(0)" id="shareOnCircle">分享到朋友圈</a>
-    <a href="javascript:void(0)" id="follow">关注秘密公众账号</a>
+    <a href="javascript:void(0)" id="shareOnCircle" class="btn btn-default" >分享到朋友圈</a>
+    <a href="javascript:void(0)" id="follow" class="btn btn-default" >关注秘密公众账号</a>
 </div>
 <div>
     <div>
-        <img src='{{headImageUrl}}' />
+        <img src='{{headImageUrl}}' class="img-circle user-avatar" />
     </div>
     <div>
         {{questionText}}
@@ -35,8 +36,9 @@
         {{^repliedByUserAnswers}}
         <div>
             <textarea placeholder="回答写在此处"></textarea>
-            <a class="reply" href="javascript:void(0)" id="reply-{{userAnswerId}}" data-useranswerid={{userAnswerId}}>好</a>
+            <a class="reply" class="btn btn-default"  href="javascript:void(0)" id="reply-{{userAnswerId}}" data-useranswerid={{userAnswerId}}>好</a>
         </div>
         {{/repliedByUserAnswers}}
     {{/userAnswers}}
+</div>
 </div>
