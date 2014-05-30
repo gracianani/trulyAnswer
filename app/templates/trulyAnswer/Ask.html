@@ -16,7 +16,10 @@
 <b>{{userAnswerText}}</b>
 <br />
     {{#repliedByUserAnswers}}
-        <div>{{userAnswerText}}</div>
+        <div class="{{userAnswerBackground}}">
+            <img url="img/secret/avatar-{{userAnswerIcon}}.png" />
+            {{userAnswerText}}
+        </div>
     {{/repliedByUserAnswers}}
     {{^repliedByUserAnswers}}
         等待回答
