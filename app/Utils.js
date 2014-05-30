@@ -14,7 +14,12 @@
             } else {
                 return false;
             }        
+        },
+        setPageTitle: function(title) {
+        if ( title ) {
+            $("title").html(title);
         }
+    },
     };
 
     return Utils;

@@ -100,7 +100,11 @@ textarea {
 ::selection {
     background: none;
 }
-
+html,body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
 body {
     background: #FFF;
     text-align: center;
@@ -110,7 +114,7 @@ body {
 }
 .btn {
     border-radius: .2rem;
-    padding: 1rem 1.4rem;
+    padding: 15px 10px;
     letter-spacing: 0.02rem;
     display: inline-block;
     text-decoration: none;
@@ -124,23 +128,6 @@ button, input, optgroup, select, textarea {
     margin: 0;
 }
 
-.form-control {
-display: block;
-width: 100%;
-height: 34px;
-padding: 6px 12px;
-font-size: 14px;
-line-height: 1.42857143;
-color: #555;
-background-color: #fff;
-background-image: none;
-border: 1px solid #ccc;
-border-radius: 4px;
--webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
--webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-}
 
 .loading-info em {
     color: #ffd800;
@@ -165,8 +152,48 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     max-width: 750px;
     margin: 0 auto;
 }
+.form-control {
+    -webkit-box-shadow:none;
+    box-shadow: none;
+    -webkit-appearance: none;
+}
 .user-avatar {
     width: 48px;
+}
+#start-cover,#reply-cover {
+    position: relative;
+    width: 150px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+#start-cover-img,#reply-cover-img {
+    width: 150px;
+}
+#start-cover-avatar {
+    position: absolute;
+}
+#start-formgroup {
+    margin: 20px auto;
+    width: 90%;
+}
+#intro {
+    text-align: left;
+}
+#intro .user-avatar {
+    border:1px solid #444;
+    margin-right: 10px;
+}
+#reply-rule {
+    margin: 10px 0 20px;
+    text-align: left;
+}
+#reply-rule h3 {
+    font-size: 1.2em;
+    text-align: center;
+}
+#confirmAndAsk {
+    width: 90%;
+    max-width: auto;
 }
 .post {
     background-color: #FFF;
@@ -570,19 +597,6 @@ a {
     font-size: 14px;
     left: 0;
 }
-#btnLink {
-    position: relative;
-    background-image: url(../../app/img/apple.png);
-    background-size: 24px 30px;
-    background-position: 16px center;
-    background-repeat: no-repeat;
-}
-#btnLink-fox {
-    position: absolute;
-    right: -10px;
-    top: 0;
-    height: 100%;
-}
 
 .overlay {
     position: absolute;
@@ -596,6 +610,7 @@ a {
     line-height: 22px;
     font-size: 16px;
     display: none;
+    z-index: 99;
 }
 #downloadArrow {
     float: right;

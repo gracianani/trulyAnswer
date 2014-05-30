@@ -9,6 +9,8 @@ require.config({
     "backbone": "../vendor/bower/backbone/backbone",
     "mustache": "../vendor/bower/mustache/mustache",
     "text":"../vendor/bower/text/text",
-    "jquerycookie":"../vendor/bower/jquery-cookie/jquery.cookie"
+    "jquerycookie":"../vendor/bower/jquery-cookie/jquery.cookie",
+    "bootstrap":"../vendor/bower/bootstrap/dist/js/bootstrap.min",
+    "animationscheduler":"../../vendor/animationScheduler"
   }
 });

@@ -1,8 +1,8 @@
 ﻿// StartView.js
 // -------
-define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html", "models/Question"],
+define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html","text!templates/trulyAnswer/StartSuccess.html", "models/Question","Utils"],
 
-    function ($, Backbone, Mustache, template, Question) {
+    function ($, Backbone, Mustache, template, successTemplate, Question, Utils) {
 
         var StartView = Backbone.View.extend({
 
@@ -12,18 +12,21 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
             // View constructor
             initialize: function (options) {
                 this.user = options.user;
-
+                this.listenTo(this, "render", this.postRender);
                 if (this.user.get("isLogin") === true) {
                     this.render();
+                } else {
+                    this.listenTo(this.user, "change", this.render);
                 }
-
-                this.listenTo(this.user, "change", this.render);
+                                
+                
             },
 
             // View Event Handlers
             events: {
 
-                "click #confirmAndAsk": "shareOnCircle"
+                "click #confirmAndAsk": "shareOnCircle",
+                "click #shareOnCircle": "showShareOverlay"
 
             },
 
@@ -31,19 +34,41 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
             render: function () {
 
                 // Dynamically updates the UI with the view's template
-                this.$el.html(Mustache.render(template));
-
+                this.$el.html(Mustache.render(template, this.user.toJSON()));
+                this.trigger("render");
                 // Maintains chainability
                 return this;
             },
-
+            postRender: function() {
+                Utils.setPageTitle( this.user.get("userName") + "：问什么问题我都回答哦！");
+            },
+            showSuccessInfo: function() {
+                Utils.setPageTitle( this.user.get("userName") + "：" + this.question.get("expiresIn") + "小时内有问必答！");
+                
+                this.$el.find("#startContent").html(Mustache.render(successTemplate, this.user.toJSON()));
+            },
+            showShareOverlay: function() {
+                var self = this;
+                $('#stage').addClass("blur"); 
+                $('.overlay').fadeIn();  
+                $('.overlay').click(function(e){
+                    $('.overlay').hide();
+                    $('#stage').removeClass("blur"); 
+                });
+            },
             shareOnCircle: function () {
+                var self = this;
                 this.question = new Question({ "questionTypeId": 1, "userId": this.user.get("userId"), "questionText" : "有问必答" });
                 var expiresIn = $("#validThrough").val();
                 this.question.set("expiresIn", expiresIn);
                 this.question.addQuestion({
                     success: function (data) {
-                        Backbone.history.navigate("#/trulyAnswer/reply/" + data.shareCode, { trigger: true, replace: true });
+                    
+                        self.showSuccessInfo();
+                        self.shareCode = data.shareCode;
+                        
+                        Backbone.history.navigate("trulyAnswer/reply/" + data.shareCode, { trigger: false, replace: true });
+                        
                     },
                     error: function (msg) {
                         alert(msg);

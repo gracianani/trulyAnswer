@@ -2,6 +2,7 @@ define(function (require, exports, module) {
     "use strict";
 
     // External dependencies.
+    require("bootstrap");
     var Backbone = require("backbone");
     var PrepareView = require("views/PrepareView");
 

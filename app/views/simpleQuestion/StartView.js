@@ -24,7 +24,6 @@ define(["jquery", "backbone", "mustache", "text!templates/simpleQuestion/Start.h
             events: {
 
                 "click #confirmAndAsk": "shareOnCircle",
-
                 "click .tips": "fillQuestion"
 
             },
