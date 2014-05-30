@@ -201,7 +201,7 @@ button, input, optgroup, select, textarea {
     font-size: 1.4em;
     text-align: center;
 }
-#confirmAndAsk {
+.btn-block {
     width: 90%;
     max-width: none;
 }
@@ -212,6 +212,9 @@ button, input, optgroup, select, textarea {
     margin-top:15px;
 }
 #userInfo .user-avatar {
+    margin-bottom: 10px;
+}
+#newUserAnswer {
     margin-bottom: 10px;
 }
 .post {

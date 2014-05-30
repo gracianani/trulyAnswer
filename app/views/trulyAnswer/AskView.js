@@ -23,18 +23,18 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
                             else {
                                 self.question.set(data);
                             }
+                            self.render();
                         },
                         error: function (msg) {
                             alert(msg);
                         }
                     }
                 );
-                this.listenTo(this.question, "change", this.render);
             },
 
             // View Event Handlers
             events: {
-                "click #ask": "ask"
+                "click #btnAsk": "ask"
             },
 
             appendAnswer: function (data) {
@@ -53,7 +53,8 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
 
 
             ask: function () {
-                this.userAnswerText = this.$el.find("#newUserAnswer").val();
+                this.userAnswerText = this.$el.find("#newUserAnswer").html();
+                console.log(this.userAnswerText);
                 var self = this;
                 var ask = new UserAnswer({
                     "userId": this.user.get("userId"),
@@ -63,6 +64,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
                 });
                 ask.addAnswer({
                     success: function (data) {
+                        console.log(self.question.get("userAnswers"));
                         self.question.get("userAnswers").push(data);
                         self.appendAnswer(data);
                     },

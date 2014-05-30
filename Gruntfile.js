@@ -24,7 +24,7 @@ module.exports = function (grunt) {
       release: {
         options: {
           mainConfigFile: "app/config.js",
-          generateSourceMaps: false,
+          generateSourceMaps: true,
           include: ["main"],
           out: "dist/source.min.js",
           optimize: "uglify2",

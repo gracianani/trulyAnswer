@@ -7,7 +7,9 @@ define(["jquery", "backbone"],
         var Question = Backbone.Model.extend({
 
             idAttribute: "questionId",
-
+            default: {
+                "userAnswers":[]
+            },
             initialize: function (options) {
                 this.set({
                     "questionText": options.questionText,
@@ -49,6 +51,7 @@ define(["jquery", "backbone"],
                     type: "GET",
                     contentType: "application/json; charset=utf-8",
                     success: function (data, textStatus, jqXHR) {
+                        console.log(data);
                         options.success(data);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
