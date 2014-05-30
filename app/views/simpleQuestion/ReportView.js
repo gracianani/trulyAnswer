@@ -1,6 +1,6 @@
-﻿// ReplyView.js
+﻿// ReportView.js
 // -------
-define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html", "models/Question", "models/UserAnswer"],
+define(["jquery", "backbone", "mustache", "text!templates/simpleQuestion/Report.html", "models/Question", "models/UserAnswer"],
 
     function ($, Backbone, Mustache, template, Question, UserAnswer) {
 
@@ -33,7 +33,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
                 this.question.fetchByShareCode({
                     success: function (data) {
                         if (data.userId != options.user.get("userId")) {
-                            Backbone.history.navigate("#/trulyAnswer/ask/" + options.shareCode, { trigger: true, replace: true });
+                            Backbone.history.navigate("#/simpleQuestion/ask/" + options.shareCode, { trigger: true, replace: true });
                         }
                         else {
                             self.question.set(data);
@@ -50,39 +50,6 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
                 this.$el.html(Mustache.render(template, this.question.toJSON()));
                 // Maintains chainability
                 return this;
-            },
-
-            reply: function (e) {
-                var repliedToUserAnswerId = $(e.target).data("useranswerid");
-                var userAnswerText = $(e.target).prev("textarea").val();
-                var reply = new UserAnswer({ "questionId": this.question.get("questionId"), "userId": this.user.get("userId"), "repliedToUserAnswerId": repliedToUserAnswerId, "userAnswerText": userAnswerText });
-                reply.addReply({
-                    success: function (data) {
-                        alert("replied");
-                    },
-                    error: function (msg) {
-                        alert(msg);
-                    }
-                });
-            },
-
-            ask: function () {
-                this.userAnswerText = this.$el.find("#newUserAnswer").val();
-                var self = this;
-                var ask = new UserAnswer({
-                    "userId": this.user.get("userId"),
-                    "questionId": this.question.get("questionId"),
-                    "userAnswerText": this.userAnswerText
-                });
-                ask.addAnswer({
-                    success: function (data) {
-                        self.question.get("userAnswers").push(data);
-                        self.appendAnswer(data);
-                    },
-                    error: function (msg) {
-                        alert(msg);
-                    }
-                });
             }
 
         });

@@ -11,7 +11,6 @@ define(["jquery", "backbone", "mustache", "text!templates/Prepare.html"],
             initialize: function (options) {
 
                 this.listenTo(this, "render", this.postRender);
-                this.render();
             },
 
             events: {

@@ -1,6 +1,6 @@
 ﻿// StartView.js
 // -------
-define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html", "models/Question"],
+define(["jquery", "backbone", "mustache", "text!templates/simpleQuestion/Start.html", "models/Question"],
 
     function ($, Backbone, Mustache, template, Question) {
 
@@ -23,7 +23,9 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
             // View Event Handlers
             events: {
 
-                "click #confirmAndAsk": "shareOnCircle"
+                "click #confirmAndAsk": "shareOnCircle",
+
+                "click .tips": "fillQuestion"
 
             },
 
@@ -38,17 +40,21 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
             },
 
             shareOnCircle: function () {
-                this.question = new Question({ "questionTypeId": 1, "userId": this.user.get("userId"), "questionText" : "有问必答" });
+                this.question = new Question({ "questionTypeId": 3, "userId": this.user.get("userId"), "questionText": this.$el.find("#yourQuestion").html() });
                 var expiresIn = $("#validThrough").val();
                 this.question.set("expiresIn", expiresIn);
                 this.question.addQuestion({
                     success: function (data) {
-                        Backbone.history.navigate("#/trulyAnswer/reply/" + data.shareCode, { trigger: true, replace: true });
+                        Backbone.history.navigate("#/simpleQuestion/report/" + data.shareCode, { trigger: true, replace: true });
                     },
                     error: function (msg) {
                         alert(msg);
                     }
                 });
+            },
+
+            fillQuestion: function (event) {
+                this.$el.find("#yourQuestion").html($(event.target).html());
             }
 
         });

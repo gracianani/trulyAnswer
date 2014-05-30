@@ -6,6 +6,7 @@ define(["jquery", "backbone", "jquerycookie", "Utils"],
                 "isLogin": false
             },
             initialize: function () {
+
                 var cookieId = $.cookie("userId");
                 if (cookieId) {
                     this.setUserId(cookieId);
@@ -18,6 +19,7 @@ define(["jquery", "backbone", "jquerycookie", "Utils"],
                 this.set("isLogin", true);
             },
             syncData: function (state) {
+
                 if (this.checkLogin()) {
                     if (!this.isLogin()) {
                         this.fetchDataByUserId();

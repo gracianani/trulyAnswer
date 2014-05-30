@@ -3,15 +3,25 @@ define(function (require, exports, module) {
 
     // External dependencies.
     var Backbone = require("backbone");
+    var PrepareView = require("views/PrepareView");
 
     var TrulyAnswerStartView = require("views/trulyAnswer/StartView");
     var TrulyAnswerReplyView = require("views/trulyAnswer/ReplyView");
     var TrulyAnswerAskView = require("views/trulyAnswer/AskView");
-    var PrepareView = require("views/PrepareView");
+
 
     var trulyAnswerStartView;
     var trulyAnswerReplyView;
     var trulyAnswerAskView;
+
+    var SimpleQuestionStartView = require("views/simpleQuestion/StartView");
+    var SimpleQuestionReportView = require("views/simpleQuestion/ReportView");
+    var SimpleQuestionAskView = require("views/simpleQuestion/AskView");
+
+    var simpleQuestionStartView;
+    var simpleQuestionReportView;
+    var simpleQuestionAskView;
+
     var prepareView;
 
     var User = require("models/User");
@@ -26,8 +36,15 @@ define(function (require, exports, module) {
 
         routes: {
             "": "index",
-            "reply/:shareCode": "reply",
-            "ask/:shareCode": "ask",
+
+            "trulyAnswer/start": "trulyAnswerStart",
+            "trulyAnswer/reply/:shareCode": "trulyAnswerReply",
+            "trulyAnswer/ask/:shareCode": "trulyAnswerAsk",
+
+            "simpleQuestion/start": "simpleQuestionStart",
+            "simpleQuestion/report/:shareCode": "simpleQuestionReport",
+            "simpleQuestion/ask/:shareCode": "simpleQuestionAsk",
+
             "login/:userId(/:shareCode)": "login"
         },
 
@@ -37,16 +54,40 @@ define(function (require, exports, module) {
             trulyAnswerStartView = new TrulyAnswerStartView({ user: user });
         },
 
-        reply: function (shareCode) {
+        trulyAnswerStart: function () {
+            prepareView.render();
+            user.syncData();
+            trulyAnswerStartView = new TrulyAnswerStartView({ user: user });
+        },
+
+        trulyAnswerReply: function (shareCode) {
             prepareView.render();
             user.syncData(shareCode);
             trulyAnswerReplyView = new TrulyAnswerReplyView({ shareCode: shareCode, user: user });
         },
 
-        ask: function (shareCode) {
+        trulyAnswerAsk: function (shareCode) {
             prepareView.render();
             user.syncData(shareCode);
             trulyAnswerAskView = new TrulyAnswerAskView({ shareCode: shareCode, user: user });
+        },
+
+        simpleQuestionStart: function () {
+            prepareView.render();
+            user.syncData();
+            simpleQuestionStartView = new SimpleQuestionStartView({ user: user });
+        },
+
+        simpleQuestionReport: function (shareCode) {
+            prepareView.render();
+            user.syncData(shareCode);
+            simpleQuestionReportView = new SimpleQuestionReportView({ shareCode: shareCode, user: user });
+        },
+
+        simpleQuestionAsk: function (shareCode) {
+            prepareView.render();
+            user.syncData(shareCode);
+            simpleQuestionAskView = new SimpleQuestionAskView({ shareCode: shareCode, user: user });
         },
 
         login: function (userId, shareCode) {
