@@ -9,7 +9,8 @@ define(["jquery", "backbone"],
             initialize: function (options) {
                 this.set({
                     userId: options.userId,
-                    questionId: options.questionId,
+                    questionShareCode: options.questionShareCode,
+                    questionTypeId : options.questionTypeId,
                     userAnswerText: options.userAnswerText,
                     repliedToUserAnswerId: options.repliedToUserAnswerId
                 });
@@ -22,7 +23,8 @@ define(["jquery", "backbone"],
                     dataType: "json",
                     data: JSON.stringify({
                         userId: self.get("userId"),
-                        questionId: self.get("questionId"),
+                        questionTypeId: self.get("questionTypeId"),
+                        questionShareCode: self.get("questionShareCode"),
                         userAnswerText: self.get("userAnswerText")
                     }),
                     type: "POST",
@@ -44,7 +46,8 @@ define(["jquery", "backbone"],
                     dataType: "json",
                     data: JSON.stringify({
                         userId: self.get("userId"),
-                        questionId: self.get("questionId"),
+                        questionShareCode: self.get("questionShareCode"),
+                        questionTypeId : self.get("questionTypeId"),
                         userAnswerText: self.get("userAnswerText"),
                         repliedToUserAnswerId: self.get("repliedToUserAnswerId")
                     }),

@@ -18,7 +18,7 @@ define(["jquery", "backbone", "mustache", "text!templates/SimpleQuestion/Ask.htm
                     {
                         success: function (data) {
                             if (data.userId == options.user.get("userId")) {
-                                Backbone.history.navigate("#/simpleQuestion/report/" + options.shareCode, { trigger: true, replace: true });
+                                Backbone.history.navigate("simpleQuestion/report/" + options.shareCode, { trigger: true, replace: true });
                             }
                             else {
                                 self.question.set(data);
@@ -38,7 +38,7 @@ define(["jquery", "backbone", "mustache", "text!templates/SimpleQuestion/Ask.htm
             },
 
             appendAnswer: function (data) {
-                this.$el.find("#userAnswerWrapper").append(Mustache.render(UserAnswerTemplate, data));
+                this.$el.find("#userAnswerWrapper").append(data);
             },
 
             // Renders the view's template to the UI
@@ -57,7 +57,8 @@ define(["jquery", "backbone", "mustache", "text!templates/SimpleQuestion/Ask.htm
                 var self = this;
                 var ask = new UserAnswer({
                     "userId": this.user.get("userId"),
-                    "questionId": this.question.get("questionId"),
+                    "questionTypeId" : this.question.get("questionTypeId"),
+                    "questionShareCode": this.question.get("shareCode"),
                     "userAnswerText": this.userAnswerText
                 });
                 ask.addAnswer({

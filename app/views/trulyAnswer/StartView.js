@@ -43,7 +43,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
                 this.question.set("expiresIn", expiresIn);
                 this.question.addQuestion({
                     success: function (data) {
-                        Backbone.history.navigate("#/trulyAnswer/reply/" + data.shareCode, { trigger: true, replace: true });
+                        Backbone.history.navigate("trulyAnswer/reply/" + data.shareCode, { trigger: true, replace: true });
                     },
                     error: function (msg) {
                         alert(msg);
