@@ -1,15 +1,13 @@
-﻿<div class="container">
-<div>
+﻿<div id="ask" class="container">
+<div id="userInfo">
     <div class="userIcon">
         <img src='{{headImageUrl}}' class="img-circle user-avatar" />
     </div>
-    <div>
-        {{userName}}有问必答
-    </div>
+    <p>
+    {{userName}}郑重承诺，<span id="remainingTime">1000</span>秒内有问必答
+    </p>
 </div>
-<div>
-{{expiresAt}}前提问，{{userName}}有问必答
-</div>
+
 <hr />
 {{#yourAnswer}}
 你的问题：<br />
@@ -25,11 +23,19 @@
 
 {{^yourAnswer}}
     <div>
-        <textarea id="newUserAnswer"></textarea>
-        <a id="ask" class="btn btn-default" href="javascript:void(0)" >就问这个了</a>
+        <textarea  id="newUserAnswer" class="form-control" rows="2" ></textarea>
+        <a id="ask" class="btn btn-default btn-block" href="javascript:void(0)" >就问这个了</a>
     </div>
+    <h3>参考问题(点击快速提问)</h3>
+    <ul>
+            <li><a class="tips" href="javascript:void(0)">你还是单身吗？</a></li>
+            <li><a class="tips" href="javascript:void(0)">你还是处吗？</a></li>
+            <li><a class="tips" href="javascript:void(0)">你和 XX 有没有过关系？</a></li>
+            <li><a class="tips" href="javascript:void(0)">你喜欢什么样的异性？</a></li>
+    </ul>
 {{/yourAnswer}}
 <hr />
+
 
 <div>
     所有问题

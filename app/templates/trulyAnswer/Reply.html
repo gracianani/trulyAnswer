@@ -1,13 +1,13 @@
 ﻿<div id="reply" class="container">
-
-
-    <div>
-        <img src='{{headImageUrl}}' class="img-circle user-avatar" />
+    <div id="userInfo">
+        <div class="userIcon">
+            <img src='{{headImageUrl}}' class="img-circle user-avatar" />
+        </div>
+        <p>
+        {{userName}}郑重承诺，<span id="remainingTime">1000</span>秒内{{questionText}}
+        </p>
     </div>
-    <div>
-        {{questionText}}
-        {{userName}} 于 {{createdAt}}
-    </div>
+    <hr />
     <div>
             有 {{numOfQuestionsToAnswer}}个问题等待回答 <br />
             点击问题即可回答

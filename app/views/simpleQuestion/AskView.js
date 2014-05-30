@@ -22,6 +22,7 @@ define(["jquery", "backbone", "mustache", "text!templates/SimpleQuestion/Ask.htm
                             }
                             else {
                                 self.question.set(data);
+                                self.question.calculateRemainingTime();
                             }
                         },
                         error: function (msg) {

@@ -3,18 +3,20 @@
     <img src="app/img/M.png" id="start-cover-img" />
 </div>
 <div id="startContent">
-
-    <div id="intro" class="clearfix container">
-        <img src='{{headImageUrl}}' class="img-circle user-avatar pull-left" /> 
-        <p>{{userName}}，设置有效时间，<br />马上就能发起“有问必答”！</p>
-    </div>
-    
+    <p id="start-intro">
+    </p>
+    <p id="start-user" class="clearfix container">
+        <img src='{{headImageUrl}}' class="img-circle user-avatar"  /> 
+        {{userName}}愿意敞开心扉：
+    </p>
     <div class="input-group input-group-lg" id="start-formgroup">
           <input type="number" class="form-control" id="validThrough" name="validThrough" placeholder="有效时间" />
           <span class="input-group-addon">小时</span>
     </div>
     
-    <a href="javascript:void(0)" id="confirmAndAsk" class="btn btn-block btn-lg btn-default" >提问</a>
+    <a href="javascript:void(0)" id="confirmAndAsk" class="btn btn-block btn-lg btn-default" >开始有问必答</a>
+
+
 </div>
 
 

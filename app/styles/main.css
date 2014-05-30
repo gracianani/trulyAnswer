@@ -158,7 +158,8 @@ button, input, optgroup, select, textarea {
     -webkit-appearance: none;
 }
 .user-avatar {
-    width: 48px;
+    width: 36px;
+    border:1px solid #444;
 }
 #start-cover,#reply-cover {
     position: relative;
@@ -172,28 +173,46 @@ button, input, optgroup, select, textarea {
 #start-cover-avatar {
     position: absolute;
 }
+#start-user {
+    font-size: 18px;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    vertical-align: middle;
+    line-height: 24px;
+}
+#start-user .user-avatar {
+    border:1px solid #444;
+    width: 24px;    
+}
 #start-formgroup {
     margin: 20px auto;
     width: 90%;
 }
-#intro {
-    text-align: left;
+#start-intro {
+    margin: 0.5em 0 0;
+    color: #999;
 }
-#intro .user-avatar {
-    border:1px solid #444;
-    margin-right: 10px;
-}
+
 #reply-rule {
     margin: 10px 0 20px;
     text-align: left;
 }
 #reply-rule h3 {
-    font-size: 1.2em;
+    font-size: 1.4em;
     text-align: center;
 }
 #confirmAndAsk {
     width: 90%;
-    max-width: auto;
+    max-width: none;
+}
+#reply-rule li{
+    margin-bottom: 10px;
+}
+#userInfo {
+    margin-top:15px;
+}
+#userInfo .user-avatar {
+    margin-bottom: 10px;
 }
 .post {
     background-color: #FFF;
@@ -600,7 +619,6 @@ a {
 
 .overlay {
     position: absolute;
-    position: fixed;
     width: 100%;
     height: 100%;
     left: 0;

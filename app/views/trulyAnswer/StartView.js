@@ -13,10 +13,10 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
             initialize: function (options) {
                 this.user = options.user;
                 this.listenTo(this, "render", this.postRender);
-                if (this.user.get("isLogin") === true) {
+                if (this.user.get("isFetchSuccess") === true) {
                     this.render();
                 } else {
-                    this.listenTo(this.user, "change", this.render);
+                    this.listenTo(this.user, "onFetchSuccess", this.render);
                 }
                                 
                 

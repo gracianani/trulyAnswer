@@ -3,7 +3,8 @@ define(["jquery", "backbone", "jquerycookie", "Utils"],
     function ($, Backbone, jqueryCookie, Utils) {
         var User = Backbone.Model.extend({
             defaults: {
-                "isLogin": false
+                "isFetchSuccess": false,
+                "isLogin":false
             },
             initialize: function () {
 
@@ -16,14 +17,11 @@ define(["jquery", "backbone", "jquerycookie", "Utils"],
             setUserId: function (userId) {
                 this.set("userId", userId);
                 $.cookie("userId", userId);
-                this.set("isLogin", true);
             },
             syncData: function (state) {
 
                 if (this.checkLogin()) {
-                    if (!this.isLogin()) {
-                        this.fetchDataByUserId();
-                    }
+                    this.fetchDataByUserId();
                 } else {
                     this.login(state);
                 }
@@ -42,10 +40,13 @@ define(["jquery", "backbone", "jquerycookie", "Utils"],
                     dataType: "json",
                     success: function (data, textStatus, jqXHR) {
                         self.set(data);
-                        self.set("isLogin", true);
+                        self.trigger("onFetchSuccess");
+                        self.set("isFetchSuccess", true);
+                        
                         if (options && options.success) {
                             options.success();
                         }
+                        
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                     }
@@ -58,10 +59,12 @@ define(["jquery", "backbone", "jquerycookie", "Utils"],
                     dataType: "json",
                     success: function (data, textStatus, jqXHR) {
                         self.set(data);
-                        self.set("isLogin", true);
+                        self.trigger("onFetchSuccess");
+                        self.set("isFetchSuccess", true);
+                        
                         if (options && options.success) {
                             options.success();
-                        }
+                        }                        
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                     }
