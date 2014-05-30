@@ -10,7 +10,7 @@ define(["jquery", "backbone"],
 
             initialize: function (options) {
                 this.set({
-                    "questionText": "有问必答",
+                    "questionText": options.questionText,
                     "questionTypeId": options.questionTypeId,
                     "userId": options.userId,
                     "expiresIn": 3,

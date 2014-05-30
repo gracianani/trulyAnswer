@@ -1,8 +1,8 @@
 ﻿// ReplyView.js
 // -------
-define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html", "models/Question", "models/UserAnswer", "text!templates/trulyAnswer/UserAnswer.html"],
+define(["jquery", "backbone", "mustache", "text!templates/SimpleQuestion/Ask.html", "models/Question", "models/UserAnswer"],
 
-    function ($, Backbone, Mustache, template, Question, UserAnswer, UserAnswerTemplate) {
+    function ($, Backbone, Mustache, template, Question, UserAnswer) {
 
         var AskView = Backbone.View.extend({
 
@@ -13,12 +13,12 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
             initialize: function (options) {
                 this.user = options.user;
                 var self = this;
-                this.question = new Question({ shareCode: options.shareCode, questionTypeId: 1, userId: this.user.get("userId") });
+                this.question = new Question({ shareCode: options.shareCode, questionTypeId: 3, userId: this.user.get("userId") });
                 this.question.fetchByShareCode(
                     {
                         success: function (data) {
                             if (data.userId == options.user.get("userId")) {
-                                Backbone.history.navigate("#/trulyAnswer/reply/" + options.shareCode, { trigger: true, replace: true });
+                                Backbone.history.navigate("#/simpleQuestion/report/" + options.shareCode, { trigger: true, replace: true });
                             }
                             else {
                                 self.question.set(data);
@@ -44,7 +44,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
             // Renders the view's template to the UI
             render: function () {
 
-                this.$el.html(Mustache.render(template, this.question.toJSON(), { userAnswer: UserAnswerTemplate }));
+                this.$el.html(Mustache.render(template, this.question.toJSON() ));
 
                 // Maintains chainability
                 return this;

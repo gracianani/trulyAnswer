@@ -7,6 +7,7 @@
     <a href="javascript:void(0)" id="shareOnCircle">分享到朋友圈</a>
     <a href="javascript:void(0)" id="follow">关注秘密公众账号</a>
 </div>
+
 <div>
     <div>
         <img src='{{headImageUrl}}' />
@@ -26,17 +27,11 @@
     </div>
     
 </div>
+
 <div>
     {{#userAnswers}}
         <div>
             {{userAnswerText}}
         </div>
-        {{#repliedByUserAnswers}} 你的回答：<b>{{userAnswerText}}</b>{{/repliedByUserAnswers}}
-        {{^repliedByUserAnswers}}
-        <div>
-            <textarea placeholder="回答写在此处"></textarea>
-            <a class="reply" href="javascript:void(0)" id="reply-{{userAnswerId}}" data-useranswerid={{userAnswerId}}>好</a>
-        </div>
-        {{/repliedByUserAnswers}}
     {{/userAnswers}}
 </div>
