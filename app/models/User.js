@@ -9,6 +9,7 @@ define(["jquery", "backbone", "jquerycookie", "Utils"],
             initialize: function () {
 
                 var cookieId = $.cookie("userId");
+                console.log(cookieId);
                 if (cookieId) {
                     this.setUserId(cookieId);
                 }
@@ -36,7 +37,7 @@ define(["jquery", "backbone", "jquerycookie", "Utils"],
                     userId = self.get("userId");
                 }
                 $.ajax({
-                    url: "http://192.168.1.103:9009/secretService/users/" + userId + "?ts=" + (new Date()).getTime(),
+                    url: "http://quiz.seemeloo.com/secretcnWebServices/secretService/users/" + userId + "?ts=" + (new Date()).getTime(),
                     dataType: "json",
                     success: function (data, textStatus, jqXHR) {
                         self.set(data);
@@ -55,7 +56,7 @@ define(["jquery", "backbone", "jquerycookie", "Utils"],
             fakeLogin: function (options) {
                 var self = this;
                 $.ajax({
-                    url: "http://192.168.1.103:9009/secretService/users/fake/?code=1",
+                    url: "http://quiz.seemeloo.com/secretcnWebServices/secretService/users/fake/?code=1",
                     dataType: "json",
                     success: function (data, textStatus, jqXHR) {
                         self.set(data);

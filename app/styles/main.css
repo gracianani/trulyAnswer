@@ -201,9 +201,19 @@ button, input, optgroup, select, textarea {
     font-size: 1.4em;
     text-align: center;
 }
-#confirmAndAsk {
-    width: 90%;
+.btn-block {
     max-width: none;
+}
+h3 {
+    font-size: 20px;
+    text-align: left;
+    margin-top: 1.5em;
+}
+#ask h3 {
+    position: relative;
+}
+#ask h3 small {
+
 }
 #reply-rule li{
     margin-bottom: 10px;
@@ -212,6 +222,9 @@ button, input, optgroup, select, textarea {
     margin-top:15px;
 }
 #userInfo .user-avatar {
+    margin-bottom: 10px;
+}
+#newUserAnswer {
     margin-bottom: 10px;
 }
 .post {
@@ -290,35 +303,32 @@ button, input, optgroup, select, textarea {
     margin: 0;
     padding: 0;
 }
+.comments .comment:first-child {
+    border-top: 1px dashed #dadada;
+}
 .comment {
-    background: #cdcdcd;
     padding: 1.5em 0;
     border-bottom: 1px dashed #dadada;
 }
-.comment-download {
-    position: relative;
-    padding: 20px 0 5px;
-    margin-bottom: 10px;
+.tips {
+    padding: 1em 0;
+    font-size: 1.2em;
+    text-align: left;
+    cursor: pointer;
 }
-.comment-download-footer {
-    height: 15px;
-    width: 100%;
-    position: absolute;
-    bottom: -10px;
-}
+
 .comment-col-1, .comment-col-2 {
     
     display: inline-block;
 }
 .comment-col-1 {
-    width: 40px;
-    padding-left: 5%;
+    width: 48px;
+    padding-left: 0%;
     float: left;
 }
 .comment-col-2 {
     width: 74%;
-    padding-right: 5%;
-    float: right;
+    float: left;
 }
 .comment-content {
     text-align: left;
@@ -326,9 +336,22 @@ button, input, optgroup, select, textarea {
     line-height: 1.5em;
     padding: 2px 0;
 }
-.comment-more {
+.comment-waiting {
     color: #999;
-    font-size: 0.8em;
+    text-align: left;
+}
+#remindUser {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top:-25px;
+}
+#yourAnswer {
+    position: relative;
+}
+.comment .avatar {
+    width: 36px;
+    height: 36px;
 }
 .avatar {
     width: 24px;
@@ -352,39 +375,6 @@ button, input, optgroup, select, textarea {
     position: relative;
 }
 
-.icon-comment,.icon-heart {
-    width: 18px;
-    height: 1.4em;
-    vertical-align: top;
-    background: url(../../app/img/secret/icon-heart-fill@2x.png) no-repeat center center;
-    background-size: 18px 18px;
-    display: inline-block;
-    margin-right: 10px;
-}
-.icon-comment {
-    background-image: url(../../app/img/secret/icon-comment-fill@2x.png);
-}
-
-.topBanner {
-    height: 64px;
-    position: relative;
-    display: block;
-    
-}
-a {
-    text-decoration: none;
-    color: #444;
-}
-.topBanner-content {
-    line-height: 64px;
-    position: relative;
-    
-    color: #434343;
-}
-.topBanner img {
-    max-width: 100%;
-    max-height: 100%;
-}
 .logo-right {
     position: absolute;
     right: 0;
@@ -595,19 +585,11 @@ a {
     left: 50%;
     margin-left: -20px;
 }
-.btn {
-    padding: 10px 15px;
+.btn-default {
     background-color: #333;
     color: #FFF;
-    border-radius: 5px;
 }
-.btn-block {
-    display: block;
-    width: 80%;
-    max-width: 400px;
-    margin: 0 auto;
-    margin-bottom: 20px;
-}
+
 .post-subTitle {
     width: 100%;
     position: absolute;

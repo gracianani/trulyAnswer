@@ -16,10 +16,19 @@
             }        
         },
         setPageTitle: function(title) {
-        if ( title ) {
-            $("title").html(title);
+            if ( title ) {
+                $("title").html(title);
+            }
+        },
+        getRandomItemFromArray: function( repo ) {
+            var item, index;
+            if ( repo && repo.length > 0 ) {
+                index = Math.floor( Math.random() * repo.length );
+                return repo[index];
+            } else {
+                return null;
+            }
         }
-    },
     };
 
     return Utils;

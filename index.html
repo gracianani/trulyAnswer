@@ -37,10 +37,49 @@
     <div class="loading-info">秘密在努力的加载<br /> (ง •̀_•́)ง</div>
   </div><!-- loading -->
   <script>
-      document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-          WeixinJSBridge.call('showOptionMenu');
-          document.getElementsByTagName('body')[0].setAttribute("class", "wechat");
-      });
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('showOptionMenu');
+        document.getElementsByTagName('body')[0].setAttribute("class", "wechat");
+    });
+    var shareInfo = shareInfo || {
+        "appid": "wx56461d8ee8d9dee5",
+        "title": "问我什么我都会回答哦",
+        "desc": "1个小时以内有问必答",
+        "img_url":"http://quiz.seemeloo.com:908/app/img/M.png",
+        "img_width": "300",
+        "img_height": "300",
+        "link":window.location.href
+    };
+
+    function shareFriend() {
+        WeixinJSBridge.invoke('sendAppMessage',shareInfo, function(res) {
+            //_report('send_msg', res.err_msg);
+        })
+    }
+    function shareTimeline() {
+        WeixinJSBridge.invoke('shareTimeline',{
+        "img_url": shareInfo.img_url,
+        "img_width": shareInfo.img_width,
+        "img_height": shareInfo.img_height,
+        "link": shareInfo.link,
+        "desc": shareInfo.desc,
+        "title": "问我什么我都会回答哦，" + shareInfo.desc
+    }, function(res) {
+           //_report('timeline', res.err_msg);
+    });
+    }
+
+    // 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        // 发送给好友
+        WeixinJSBridge.on('menu:share:appmessage', function(argv){
+            shareFriend();
+        });
+        // 分享到朋友圈
+        WeixinJSBridge.on('menu:share:timeline', function(argv){
+            shareTimeline();
+        });
+    }, false);    
   </script>
   <!-- Application source. -->
   <!-- build:[src] /source.min.js?v=1.41-->
