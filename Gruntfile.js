@@ -17,7 +17,7 @@ module.exports = function (grunt) {
 
     // Run your source code through JSHint's defaults.
     jshint: ["app/**/*.js"],
-
+    
     // This task uses James Burke's excellent r.js AMD builder to take all
     // modules and concatenate them into a single file.
     requirejs: {
@@ -28,7 +28,6 @@ module.exports = function (grunt) {
           include: ["main"],
           out: "dist/source.min.js",
           optimize: "uglify2",
-
           // Since we bootstrap with nested `require` calls this option allows
           // R.js to find them.
           findNestedDependencies: true,
