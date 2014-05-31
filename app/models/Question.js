@@ -1,14 +1,24 @@
 ﻿// Question.js
 
-define(["jquery", "backbone"],
+define(["jquery", "backbone","utils"],
 
-    function ($, Backbone) {
+    function ($, Backbone,Utils) {
 
         var Question = Backbone.Model.extend({
 
             idAttribute: "questionId",
-            default: {
-                "userAnswers":[]
+            defaults: {
+                "userAnswers":[],
+                "getRandomColorWithoutVanilla": function(){
+                    var ColorRepo = ["Cobalt", "Skyfall", "Aquamarine","Olive","Cash", "EmeraldSea", "Hopscotch","Lavender", "Burst", "Cupid","Peony", "Midnight"];
+    
+                    return Utils.getRandomItemFromArray(ColorRepo);
+                },
+                "getRandomIcon": function(){
+                var IconRepo = ["bird", "bolt", "bone","bug","clove", "coffee", "droid","ghost", "heart", "icecream","jigsaw", "meow","outlet", "owl", "pinwheel","planet", "poo", "rocket","sailboat", "shirt","skull", "spade", "star","wine"];
+
+                    return Utils.getRandomItemFromArray(IconRepo);
+                }
             },
             initialize: function (options) {
                 this.set({
@@ -23,7 +33,7 @@ define(["jquery", "backbone"],
             addQuestion: function (options) {
                 var self = this;
                 $.ajax({
-                    url: "http://192.168.1.103:9009/secretService/Questions",
+                    url: "http://quiz.seemeloo.com/secretcnWebServices/secretService/Questions",
                     dataType: "json",
                     data: JSON.stringify({
                         userId: self.get("userId"),
@@ -46,7 +56,7 @@ define(["jquery", "backbone"],
             fetchByShareCode: function (options) {
                 var self = this;
                 $.ajax({
-                    url: "http://192.168.1.103:9009/secretService/Questions/" + self.get("shareCode") + "/" + self.get("userId"),
+                    url: "http://quiz.seemeloo.com/secretcnWebServices/secretService/Questions/" + self.get("shareCode") + "/" + self.get("userId"),
                     dataType: "json",
                     type: "GET",
                     contentType: "application/json; charset=utf-8",

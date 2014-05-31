@@ -4,49 +4,63 @@
         <img src='{{headImageUrl}}' class="img-circle user-avatar" />
     </div>
     <p>
-    {{userName}}郑重承诺，<span id="remainingTime">1000</span>秒内有问必答
+    {{userName}}郑重承诺，<span id="remainingTime">天亮之前</span>有问必答
     </p>
 </div>
 
-<hr />
 {{#yourAnswer}}
-你的问题：<br />
-<b>{{userAnswerText}}</b>
-<br />
-    {{#repliedByUserAnswers}}
-        <div class="{{userAnswerBackground}}">
-            <img url="img/secret/avatar-{{userAnswerIcon}}.png" />
-            {{userAnswerText}}
+<h3>你的问题</h3>
+<ul class="comments">
+<li id="yourAnswer" class="comment clearfix"  data-entranceAnimation="fadeInDown">
+    <div class="comment-col-1">
+        <div class="avatar">
+            <div class="avatarBackground backgroundColor-{{getRandomColorWithoutVanilla}}">
+             </div>
+             <img src="app/img/secret/avatar-{{getRandomIcon}}@2x.png" />
         </div>
-    {{/repliedByUserAnswers}}
+    </div>
+    <div class="comment-col-2">
+            <div class="comment-content">{{userAnswerText}}</div>
+            {{#repliedByUserAnswers}}
+            <div class="comment-reply">{{userAnswerText}}</div>
+            {{/repliedByUserAnswers}}
+            {{^repliedByUserAnswers}}
+            <div class="comment-waiting">等待{{userName}}回答...</div>
+            {{/repliedByUserAnswers}}
+    </div>
     {{^repliedByUserAnswers}}
-        等待回答
+    <button id="remindUser" class="btn btn-default btn-sm">提醒Ta</button>
     {{/repliedByUserAnswers}}
+    
+</li>
+</ul>
 {{/yourAnswer}}
 
 {{^yourAnswer}}
     <div>
-        <textarea  id="newUserAnswer" class="form-control" rows="2" ></textarea>
+        <input  id="newUserAnswer" placeholder="输入问题，或从下面参考中选一个" class="form-control input-lg" type="text" />
         <button id="btnAsk" class="btn btn-default btn-block">就问这个了</button>
 
-    <h3>参考问题(点击快速提问)</h3>
-    <ul>
-            <li><a class="tips" href="javascript:void(0)">你还是单身吗？</a></li>
-            <li><a class="tips" href="javascript:void(0)">你还是处吗？</a></li>
-            <li><a class="tips" href="javascript:void(0)">你和 XX 有没有过关系？</a></li>
-            <li><a class="tips" href="javascript:void(0)">你喜欢什么样的异性？</a></li>
+    <h3><small>暗黑问题大全 点击快速提问</small></h3>
+    <ul class="comments">
+            <li class="comment tips">你还是单身吗？</li>
+            <li class="comment tips">你还是处吗？</li>
+            <li class="comment tips">你和 XX 有没有过关系？</li>
+            <li class="comment tips">你喜欢什么样的异性？</li>
+            <li class="comment tips">还想你的初恋么？</li>
+            <li class="comment tips">你和Ex还有联系么？</li>
     </ul>
     </div>
 {{/yourAnswer}}
-<hr />
 
-
+{{#yourAnswer}}
 <div>
-    所有问题
-    <div id="userAnswerWrapper">
+<h3>所有问题</h3>
+    <ul id="userAnswerWrapper" class="comments">
     {{#userAnswers}}
         {{> userAnswer}}
     {{/userAnswers}}
-    </div>
+    </ul>
 </div>
+{{/yourAnswer}}
 </div>

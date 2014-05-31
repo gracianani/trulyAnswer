@@ -13,6 +13,18 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
             initialize: function (options) {
                 this.user = options.user;
                 var self = this;
+                
+                if (this.user.get("isFetchSuccess") === true) {
+                    this.loadQuestion(options);
+                } else {
+                    this.listenTo(this.user, "onFetchSuccess", function(){
+                        self.loadQuestion(options);
+                    });
+                }
+                
+            },
+            loadQuestion: function(options) {
+                var self = this;
                 this.question = new Question({ shareCode: options.shareCode, questionTypeId: 1, userId: this.user.get("userId") });
                 this.question.fetchByShareCode(
                     {
@@ -22,19 +34,20 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
                             }
                             else {
                                 self.question.set(data);
+                                self.render();
                             }
-                            self.render();
                         },
                         error: function (msg) {
                             alert(msg);
                         }
                     }
-                );
+                );                
             },
-
             // View Event Handlers
             events: {
-                "click #btnAsk": "ask"
+                "click #btnAsk": "ask",
+                "click .tips": "onTapATip",
+                "click #remindUser": "showShareOverlay"
             },
 
             appendAnswer: function (data) {
@@ -49,29 +62,45 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
                 // Maintains chainability
                 return this;
             },
-
-
-
-            ask: function () {
-                this.userAnswerText = this.$el.find("#newUserAnswer").html();
-                console.log(this.userAnswerText);
+            onTapATip: function(e) {
+                e.preventDefault();
+                this.$el.find("#newUserAnswer").val( $(e.currentTarget).text() );
+                this.$el.find("#newUserAnswer").focus();
+            },
+            showShareOverlay: function() {
                 var self = this;
-                var ask = new UserAnswer({
-                    "userId": this.user.get("userId"),
-                    "questionTypeId" : this.question.get("questionTypeId"),
-                    "questionShareCode": this.question.get("shareCode"),
-                    "userAnswerText": this.userAnswerText
+                $('#stage').addClass("blur"); 
+                $('.overlay').fadeIn();  
+                $('.overlay').click(function(e){
+                    $('.overlay').hide();
+                    $('#stage').removeClass("blur"); 
                 });
-                ask.addAnswer({
-                    success: function (data) {
-                        console.log(self.question.get("userAnswers"));
-                        self.question.get("userAnswers").push(data);
-                        self.appendAnswer(data);
-                    },
-                    error: function (msg) {
-                        alert(msg);
-                    }
-                });
+            },
+            ask: function () {
+                this.userAnswerText = this.$el.find("#newUserAnswer").val();
+                if ( this.userAnswerText && this.userAnswerText === "" ) {
+                    
+                } else {
+                    var self = this;
+                    var ask = new UserAnswer({
+                        "userId": this.user.get("userId"),
+                        "questionTypeId" : this.question.get("questionTypeId"),
+                        "questionShareCode": this.question.get("shareCode"),
+                        "userAnswerText": this.userAnswerText
+                    });
+                    ask.addAnswer({
+                        success: function (data) {
+                            console.log(self.question.get("userAnswers"));
+                            self.question.get("userAnswers").push(data);
+                            self.appendAnswer(data);
+                        },
+                        error: function (msg) {
+                            alert(msg);
+                        }
+                    });
+                }
+                
+                
             }
 
         });

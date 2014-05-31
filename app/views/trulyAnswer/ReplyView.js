@@ -13,12 +13,13 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
             initialize: function (options) {
                 var self = this;
                 this.user = options.user;
-                if (!this.user.checkLogin()) {
-                    this.user.login(options.shareCode);
-                }
-                else {
+                
+                if (this.user.get("isFetchSuccess") === true) {
                     this.loadQuestion(options);
-                    this.listenTo(this.question, "change", this.render);
+                } else {
+                    this.listenTo(this.user, "onFetchSuccess", function(){
+                        self.loadQuestion(options);
+                    });
                 }
             },
 
@@ -32,13 +33,12 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
                 this.question = new Question({ shareCode: options.shareCode, questionTypeId: 1, userId: this.user.get("userId") });
                 this.question.fetchByShareCode({
                     success: function (data) {
-                        console.log(data);
-                        console.log(options.user.get("userId"));
                         if (data.userId != options.user.get("userId")) {
                             Backbone.history.navigate("trulyAnswer/ask/" + options.shareCode, { trigger: true, replace: true });
                         }
                         else {
                             self.question.set(data);
+                            self.render();
                         }
                     },
                     error: function (msg) {

@@ -18,7 +18,6 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
                 } else {
                     this.listenTo(this.user, "onFetchSuccess", this.render);
                 }
-                                
                 
             },
 
