@@ -13,11 +13,11 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
             initialize: function (options) {
                 var self = this;
                 this.user = options.user;
-                
+
                 if (this.user.get("isFetchSuccess") === true) {
                     this.loadQuestion(options);
                 } else {
-                    this.listenTo(this.user, "onFetchSuccess", function(){
+                    this.listenTo(this.user, "onFetchSuccess", function () {
                         self.loadQuestion(options);
                     });
                 }
@@ -57,7 +57,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
             reply: function (e) {
                 var repliedToUserAnswerId = $(e.target).data("useranswerid");
                 var userAnswerText = $(e.target).prev("textarea").val();
-                var reply = new UserAnswer({ "questionShareCode": this.question.get("shareCode"), "userId": this.user.get("userId"), "repliedToUserAnswerId": repliedToUserAnswerId, "userAnswerText": userAnswerText });
+                var reply = new UserAnswer({ "questionShareCode": this.question.get("shareCode"), "questionTypeId" : 1, "userId": this.user.get("userId"), "repliedToUserAnswerId": repliedToUserAnswerId, "userAnswerText": userAnswerText });
                 reply.addReply({
                     success: function (data) {
                         alert("replied");

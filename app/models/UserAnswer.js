@@ -10,7 +10,7 @@ define(["jquery", "backbone"],
                 this.set({
                     userId: options.userId,
                     questionShareCode: options.questionShareCode,
-                    questionTypeId : options.questionTypeId,
+                    questionTypeId: options.questionTypeId,
                     userAnswerText: options.userAnswerText,
                     repliedToUserAnswerId: options.repliedToUserAnswerId
                 });
@@ -47,7 +47,7 @@ define(["jquery", "backbone"],
                     data: JSON.stringify({
                         userId: self.get("userId"),
                         questionShareCode: self.get("questionShareCode"),
-                        questionTypeId : self.get("questionTypeId"),
+                        questionTypeId: self.get("questionTypeId"),
                         userAnswerText: self.get("userAnswerText"),
                         repliedToUserAnswerId: self.get("repliedToUserAnswerId")
                     }),
