@@ -1,5 +1,5 @@
-﻿<div id="ask" class="container">
-<div id="userInfo">
+﻿<div id="ask">
+<div id="userInfo" class="container">
     <div class="userIcon">
         <img src='{{headImageUrl}}' class="img-circle user-avatar" />
     </div>
@@ -37,25 +37,28 @@
 {{/yourAnswer}}
 
 {{^yourAnswer}}
-    <div>
-        <input  id="newUserAnswer" placeholder="输入问题，或从下面参考中选一个" class="form-control input-lg" type="text" />
+<div id="createAnswer">
+    <div   class="container">
+        <input  id="newUserAnswer" placeholder="我想问..." class="form-control input-lg" type="text" />
         <button id="btnAsk" class="btn btn-default btn-block">就问这个了</button>
-
-    <h3><small>暗黑问题大全 点击快速提问</small></h3>
-    <ul class="comments">
-            <li class="comment tips">你还是单身吗？</li>
-            <li class="comment tips">你还是处吗？</li>
-            <li class="comment tips">你和 XX 有没有过关系？</li>
-            <li class="comment tips">你喜欢什么样的异性？</li>
-            <li class="comment tips">还想你的初恋么？</li>
-            <li class="comment tips">你和Ex还有联系么？</li>
-    </ul>
     </div>
+    <div id="answerTips">
+        <h3><small>暗黑问题大全 点击快速提问</small></h3>
+        <ul class="comments">
+                <li class="comment tips">你还是单身吗？</li>
+                <li class="comment tips">你还是处吗？</li>
+                <li class="comment tips">你和 XX 有没有过关系？</li>
+                <li class="comment tips">你喜欢什么样的异性？</li>
+                <li class="comment tips">还想你的初恋么？</li>
+                <li class="comment tips">你和Ex还有联系么？</li>
+        </ul>
+    </div>
+</div>
 {{/yourAnswer}}
 
 {{#yourAnswer}}
-<div>
-<h3>所有问题</h3>
+<div id="allAnswers">
+    <h3>所有问题</h3>
     <ul id="userAnswerWrapper" class="comments">
     {{#userAnswers}}
         {{> userAnswer}}

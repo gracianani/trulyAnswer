@@ -186,7 +186,6 @@ button, input, optgroup, select, textarea {
 }
 #start-formgroup {
     margin: 20px auto;
-    width: 90%;
 }
 #start-intro {
     margin: 0.5em 0 0;
@@ -208,13 +207,13 @@ h3 {
     font-size: 20px;
     text-align: left;
     margin-top: 1.5em;
+    padding-left: 15px;
 }
 #ask h3 {
     position: relative;
 }
-#ask h3 small {
 
-}
+
 #reply-rule li{
     margin-bottom: 10px;
 }
@@ -311,7 +310,7 @@ h3 {
     border-bottom: 1px dashed #dadada;
 }
 .tips {
-    padding: 1em 0;
+    padding: 1em 15px;
     font-size: 1.2em;
     text-align: left;
     cursor: pointer;
