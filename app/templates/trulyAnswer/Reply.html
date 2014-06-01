@@ -1,5 +1,5 @@
-﻿<div id="reply" class="container">
-    <div id="userInfo">
+﻿<div id="reply">
+    <div id="userInfo" class="container">
         <div class="userIcon">
             <img src='{{headImageUrl}}' class="img-circle user-avatar" />
         </div>
@@ -7,30 +7,49 @@
         {{userName}}郑重承诺，<span id="remainingTime">1000</span>秒内{{questionText}}
         </p>
     </div>
-    <hr />
     <div>
-            有 {{numOfQuestionsToAnswer}}个问题等待回答 <br />
-            点击问题即可回答
+            <h3><small>有 {{numOfQuestionsToAnswer}}个问题等待回答 点击问题即可回答</small></h3>
 
         {{^userAnswers}}
-            尚未收到回复<br />
-            把这个页面分享到朋友圈或微信群，让朋友们来回复吧。
+            <div id="shareTips">
+                <h3>伤感，还没有人提问...</h3>
+                <p class="container">马上分享， 让朋友匿名提问吧！</p>
+            </div>
         {{/userAnswers}}
+        
     </div>
     
 
-<div>
-    {{#userAnswers}}
-        <div>
-            {{userAnswerText}}
-        </div>
-        {{#repliedByUserAnswers}} 你的回答：<b>{{userAnswerText}}</b>{{/repliedByUserAnswers}}
-        {{^repliedByUserAnswers}}
-        <div>
-            <textarea placeholder="回答写在此处"></textarea>
-            <a class="reply" class="btn btn-default"  href="javascript:void(0)" id="reply-{{userAnswerId}}" data-useranswerid={{userAnswerId}}>好</a>
-        </div>
-        {{/repliedByUserAnswers}}
-    {{/userAnswers}}
-</div>
+    <ul class="comments">
+        {{#userAnswers}}
+        <li class="comment clearfix">
+            <div class="comment-col-1">
+                <div class="avatar">
+                    <div class="avatarBackground backgroundColor-{{getRandomColorWithoutVanilla}}">
+                     </div>
+                     <img src="app/img/secret/avatar-{{getRandomIcon}}@2x.png" />
+                </div>
+            </div>
+            <div class="comment-col-2">
+                <div class="comment-content">{{userAnswerText}}</div>
+                
+                {{#repliedByUserAnswers}}
+                <div class="comment-reply">
+                你的回答：{{userAnswerText}} 
+                </div>
+                {{/repliedByUserAnswers}}
+                {{^repliedByUserAnswers}}
+                <div class="comment-reply-form">
+                    <textarea placeholder="真诚的回答" class="form-control" rows="2"></textarea>
+                    <button class="reply btn btn-default btn-block" id="reply-{{userAnswerId}}" data-useranswerid={{userAnswerId}}>好</button>
+                </div>
+                {{/repliedByUserAnswers}}
+            </div>
+        </li>
+        {{/userAnswers}}
+    </ul>
+
+    <div class="container">
+        <a href="javascript:void(0)" id="replyShareOnCircle" class="btn btn-default btn-block" >分享到朋友圈</a>
+    </div>
 </div>

@@ -12,6 +12,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
             // View constructor
             initialize: function (options) {
                 this.user = options.user;
+                this.shareCode = options.shareCode;
                 var self = this;
                 
                 if (this.user.get("isFetchSuccess") === true) {
@@ -90,9 +91,9 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
                     });
                     ask.addAnswer({
                         success: function (data) {
-                            console.log(self.question.get("userAnswers"));
+                            
                             self.question.get("userAnswers").push(data);
-                            self.appendAnswer(data);
+                            window.location.reload();
                         },
                         error: function (msg) {
                             alert(msg);

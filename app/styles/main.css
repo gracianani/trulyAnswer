@@ -148,7 +148,6 @@ button, input, optgroup, select, textarea {
     width: 31px;
 }
 .container {
-    width: 100%;
     max-width: 750px;
     margin: 0 auto;
 }
@@ -321,8 +320,8 @@ h3 {
     display: inline-block;
 }
 .comment-col-1 {
-    width: 48px;
-    padding-left: 0%;
+    width: 60px;
+    padding-left: 15px;
     float: left;
 }
 .comment-col-2 {
@@ -335,6 +334,9 @@ h3 {
     line-height: 1.5em;
     padding: 2px 0;
 }
+.comment-reply {
+    text-align: left;
+}
 .comment-waiting {
     color: #999;
     text-align: left;
@@ -345,8 +347,15 @@ h3 {
     top: 50%;
     margin-top:-25px;
 }
+#shareTips {
+    text-align: left;
+    margin-bottom: 20px;
+}
 #yourAnswer {
     position: relative;
+}
+#replyShareOnCircle {
+    margin-top: 20px;
 }
 .comment .avatar {
     width: 36px;

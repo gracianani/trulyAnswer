@@ -60,7 +60,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
                 var reply = new UserAnswer({ "questionShareCode": this.question.get("shareCode"), "questionTypeId" : 1, "userId": this.user.get("userId"), "repliedToUserAnswerId": repliedToUserAnswerId, "userAnswerText": userAnswerText });
                 reply.addReply({
                     success: function (data) {
-                        alert("replied");
+                        window.location.reload();
                     },
                     error: function (msg) {
                         alert(msg);
