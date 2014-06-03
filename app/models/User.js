@@ -9,7 +9,6 @@ define(["jquery", "backbone", "jquerycookie", "Utils"],
             initialize: function () {
 
                 var cookieId = $.cookie("userId");
-                console.log(cookieId);
                 if (cookieId) {
                     this.setUserId(cookieId);
                 }

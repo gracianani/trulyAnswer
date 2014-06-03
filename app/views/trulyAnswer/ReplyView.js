@@ -1,8 +1,8 @@
 ﻿// ReplyView.js
 // -------
-define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html", "models/Question", "models/UserAnswer"],
+define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html", "models/Question", "models/UserAnswer", "views/trulyAnswer/Configs", "Utils"],
 
-    function ($, Backbone, Mustache, template, Question, UserAnswer) {
+    function ($, Backbone, Mustache, template, Question, UserAnswer, Configs, Utils) {
 
         var ReplyView = Backbone.View.extend({
 
@@ -14,6 +14,8 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
                 var self = this;
                 this.user = options.user;
 
+                this.listenTo(this, "render", this.postRender);
+                
                 if (this.user.get("isFetchSuccess") === true) {
                     this.loadQuestion(options);
                 } else {
@@ -50,6 +52,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
             render: function () {
                 // Dynamically updates the UI with the view's template
                 this.$el.html(Mustache.render(template, this.question.toJSON()));
+                this.trigger("render");
                 // Maintains chainability
                 return this;
             },
@@ -66,6 +69,33 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
                         alert(msg);
                     }
                 });
+            },
+            postRender: function() {
+                var titleText = Utils.getRandomItemFromArray(Configs.titleTexts);
+                var descText = Utils.getRandomItemFromArray(Configs.descTexts);
+                
+                shareInfo.title = titleText.titleBefore + this.user.get("userName") + titleText.titleAfter;
+                shareInfo.desc =  descText.descBefore + this.question.get("expiresIn") + descText.descAfter;
+                shareInfo.shareTimelineTitle = shareInfo.title + shareInfo.desc;
+                shareInfo.link = window.location.href;
+                
+                if ( ! titleText.useDefaultImg ) {
+                    shareInfo.img_url = this.user.get("headImageUrl");
+                }
+                this.startCountDown();
+            },
+            startCountDown: function() {
+                var self = this;
+                var $remainingTimeEl = this.$el.find("#remainingTime");
+                var remainingTime = this.question.get("remainingTime");
+                var timer;
+                
+                if ( remainingTime && remainingTime > 0 ) {
+                    timer = setInterval(function(){
+                        remainingTime --;
+                        $remainingTimeEl.text(remainingTime);
+                    }, 1000);
+                }
             }
 
         });

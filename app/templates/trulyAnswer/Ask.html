@@ -1,10 +1,10 @@
-﻿<div id="ask">
-<div id="userInfo" class="container">
-    <div class="userIcon">
+﻿<div id="ask" class="container">
+<div id="userInfo" class="cleafix">
+    <div class="userIcon pull-left">
         <img src='{{headImageUrl}}' class="img-circle user-avatar" />
     </div>
     <p>
-    {{userName}}郑重承诺，<span id="remainingTime">天亮之前</span>有问必答
+    {{userName}}向你承诺<br /><span id="remainingTime">{{remainingTime}}</span> 秒内有问必答
     </p>
 </div>
 
@@ -29,7 +29,7 @@
             {{/repliedByUserAnswers}}
     </div>
     {{^repliedByUserAnswers}}
-    <button id="remindUser" class="btn btn-default btn-sm">提醒Ta</button>
+    <button id="remindUser" class="btn btn-default btn-sm  btn-share">提醒Ta</button>
     {{/repliedByUserAnswers}}
     
 </li>
@@ -38,21 +38,16 @@
 
 {{^yourAnswer}}
 <div id="createAnswer">
-    <div   class="container">
-        <input  id="newUserAnswer" placeholder="我想问..." class="form-control input-lg" type="text" />
-        <button id="btnAsk" class="btn btn-default btn-block">就问这个了</button>
-    </div>
-    <div id="answerTips">
+    <input  id="newUserAnswer" placeholder="我想问..." class="form-control input-lg" type="text" />
+    <button id="btnAsk" class="btn btn-default btn-block">就问这个了</button>
+</div>
+<div id="answerTips">
         <h3><small>暗黑问题大全 点击快速提问</small></h3>
         <ul class="comments">
-                <li class="comment tips">你还是单身吗？</li>
-                <li class="comment tips">你还是处吗？</li>
-                <li class="comment tips">你和 XX 有没有过关系？</li>
-                <li class="comment tips">你喜欢什么样的异性？</li>
-                <li class="comment tips">还想你的初恋么？</li>
-                <li class="comment tips">你和Ex还有联系么？</li>
+                {{#QuestionTips}}
+                <li class="comment tips">{{text}}</li>
+                {{/QuestionTips}}
         </ul>
-    </div>
 </div>
 {{/yourAnswer}}
 

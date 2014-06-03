@@ -1,8 +1,8 @@
 ﻿// StartView.js
 // -------
-define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html","text!templates/trulyAnswer/StartSuccess.html", "models/Question","Utils"],
+define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html","text!templates/trulyAnswer/StartSuccess.html", "models/Question","Utils","views/trulyAnswer/Configs"],
 
-    function ($, Backbone, Mustache, template, successTemplate, Question, Utils) {
+    function ($, Backbone, Mustache, template, successTemplate, Question, Utils, Configs) {
 
         var StartView = Backbone.View.extend({
 
@@ -39,10 +39,21 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
                 return this;
             },
             postRender: function() {
-                Utils.setPageTitle( this.user.get("userName") + "：问什么问题我都回答哦！");
+                shareInfo.title = this.user.get("userName") + ":" + shareInfo.title;
+                shareInfo.shareTimelineTitle = this.user.get("userName") + ":"  + shareInfo.shareTimelineTitle;
             },
             showSuccessInfo: function() {
-                Utils.setPageTitle( this.user.get("userName") + "：" + this.question.get("expiresIn") + "小时内有问必答！");
+                var titleText = Utils.getRandomItemFromArray(Configs.titleTexts);
+                var descText = Utils.getRandomItemFromArray(Configs.descTexts);
+                
+                shareInfo.title = titleText.titleBefore + this.user.get("userName") + titleText.titleAfter;
+                shareInfo.desc =  descText.descBefore + this.question.get("expiresIn") + descText.descAfter;
+                shareInfo.shareTimelineTitle = shareInfo.title + shareInfo.desc;
+                shareInfo.link = window.location.href;
+                
+                if ( ! titleText.useDefaultImg ) {
+                    shareInfo.img_url = this.user.get("headImageUrl");
+                }
                 
                 this.$el.find("#startContent").html(Mustache.render(successTemplate, this.user.toJSON()));
             },

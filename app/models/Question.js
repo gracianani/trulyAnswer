@@ -73,9 +73,10 @@ define(["jquery", "backbone","utils"],
                 var expiresAt = Date.parse( this.get("expiresAt") );
                 var now = (new Date()).getTime();
                 var remainingTime = Math.floor( (expiresAt - now) / 1000 );
-                if ( remainingTime && remainingTime > 0 ) {
+                if ( remainingTime && remainingTime < 0 ) {
                     remainingTime = 0;
                 }
+
                 this.set("remainingTime", remainingTime);
             }
 

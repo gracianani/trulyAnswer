@@ -1,24 +1,21 @@
 ﻿<div id="reply">
     <div id="userInfo" class="container">
-        <div class="userIcon">
+        <div class="userIcon pull-left">
             <img src='{{headImageUrl}}' class="img-circle user-avatar" />
         </div>
         <p>
-        {{userName}}郑重承诺，<span id="remainingTime">1000</span>秒内{{questionText}}
+        {{userName}}向亲友承诺，<br /><span id="remainingTime">1000</span>秒内{{questionText}}
         </p>
     </div>
-    <div>
-            <h3><small>有 {{numOfQuestionsToAnswer}}个问题等待回答 点击问题即可回答</small></h3>
 
-        {{^userAnswers}}
-            <div id="shareTips">
-                <h3>伤感，还没有人提问...</h3>
-                <p class="container">马上分享， 让朋友匿名提问吧！</p>
-            </div>
-        {{/userAnswers}}
-        
-    </div>
-    
+    <h3><small>有 {{numOfQuestionsToAnswer}}个问题等待回答 点击问题即可回答</small></h3>
+
+    {{^userAnswers}}
+        <div id="shareTips" class="container">
+                <big>伤感，还没有人提问...</big>
+                <p>马上分享， 让朋友<em>匿名</em>提问吧！</p>
+        </div>
+    {{/userAnswers}}  
 
     <ul class="comments">
         {{#userAnswers}}
@@ -50,6 +47,6 @@
     </ul>
 
     <div class="container">
-        <a href="javascript:void(0)" id="replyShareOnCircle" class="btn btn-default btn-block" >分享到朋友圈</a>
+        <a href="javascript:void(0)" id="replyShareOnCircle" class="btn btn-default btn-block btn-share" >分享到朋友圈</a>
     </div>
 </div>

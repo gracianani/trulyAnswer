@@ -44,11 +44,12 @@
     var shareInfo = shareInfo || {
         "appid": "wx56461d8ee8d9dee5",
         "title": "问我什么我都会回答哦",
-        "desc": "1个小时以内有问必答",
+        "desc": "1小时内有问必答，谨慎点击。",
         "img_url":"http://quiz.seemeloo.com:908/app/img/M.png",
         "img_width": "300",
         "img_height": "300",
-        "link":window.location.href
+        "link":window.location.href,
+        "shareTimelineTitle" : "1小时内有问必答！"
     };
 
     function shareFriend() {
@@ -63,7 +64,7 @@
         "img_height": shareInfo.img_height,
         "link": shareInfo.link,
         "desc": shareInfo.desc,
-        "title": "问我什么我都会回答哦，" + shareInfo.desc
+        "title": shareInfo.shareTimelineTitle
     }, function(res) {
            //_report('timeline', res.err_msg);
     });
