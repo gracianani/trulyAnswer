@@ -8,18 +8,19 @@
         </p>
     </div>
 
-    <h3><small>有 {{numOfQuestionsToAnswer}}个问题等待回答 点击问题即可回答</small></h3>
+    <h3><small>有 {{numOfQuestionsToAnswer}} 个问题等待回答</small></h3>
 
     {{^userAnswers}}
         <div id="shareTips" class="container">
                 <big>伤感，还没有人提问...</big>
                 <p>马上分享， 让朋友<em>匿名</em>提问吧！</p>
+                <p><a href="javascript:void(0)" id="replyShareOnCircle" class="btn btn-default btn-block btn-share" >分享到朋友圈</a></p>
         </div>
     {{/userAnswers}}  
 
     <ul class="comments">
         {{#userAnswers}}
-        <li class="comment clearfix">
+        <li class="comment clearfix userAnswer {{^repliedByUserAnswers}}unreplied bg-warning{{/repliedByUserAnswers}}" >
             <div class="comment-col-1">
                 <div class="avatar">
                     <div class="avatarBackground backgroundColor-{{getRandomColorWithoutVanilla}}">
@@ -36,9 +37,10 @@
                 </div>
                 {{/repliedByUserAnswers}}
                 {{^repliedByUserAnswers}}
-                <div class="comment-reply-form">
+                <div class="comment-waiting">点击即可回答</div>
+                <div class="comment-reply-form hidden">
                     <textarea placeholder="真诚的回答" class="form-control" rows="2"></textarea>
-                    <button class="reply btn btn-default btn-block" id="reply-{{userAnswerId}}" data-useranswerid={{userAnswerId}}>好</button>
+                    <button class="reply btn btn-default btn-block btn-sm" id="reply-{{userAnswerId}}" data-useranswerid={{userAnswerId}}>好</button>
                 </div>
                 {{/repliedByUserAnswers}}
             </div>
@@ -46,7 +48,5 @@
         {{/userAnswers}}
     </ul>
 
-    <div class="container">
-        <a href="javascript:void(0)" id="replyShareOnCircle" class="btn btn-default btn-block btn-share" >分享到朋友圈</a>
-    </div>
+
 </div>

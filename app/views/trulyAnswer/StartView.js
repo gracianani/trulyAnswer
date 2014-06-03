@@ -74,11 +74,10 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
                 this.question.addQuestion({
                     success: function (data) {
              
-                        self.showSuccessInfo();
+                        
                         self.shareCode = data.shareCode;
-                        
                         Backbone.history.navigate("trulyAnswer/reply/" + data.shareCode, { trigger: false, replace: true });
-                        
+                        self.showSuccessInfo();
 
                     },
                     error: function (msg) {

@@ -308,14 +308,30 @@ em {
 }
 .comment-reply {
     text-align: left;
+    padding-top: 10px;
+    border-top: 1px dashed #dedede;
+    margin-top: 10px;
 }
 .comment-waiting {
     color: #999;
     text-align: left;
 }
+.comment-reply-form {
+    padding: 15px 0;
+}
+.comment-reply-form .form-control {
+    margin-bottom: 10px;
+}
+
+.unreplied {
+    cursor: pointer;
+}
+.unreplied:hover,.unreplied:active {
+    color:#df6880;
+}
 #remindUser {
     position: absolute;
-    right: 0;
+    right: 10px;
     top: 50%;
     margin-top:-25px;
 }
@@ -571,6 +587,7 @@ em {
 }
 .btn-default:hover,.btn-default:active {
     background-color: #df6880;
+    color: #FFF;
 }
 .post-subTitle {
     width: 100%;
@@ -626,6 +643,9 @@ em {
 #answerTips {
     padding-top: 175px;
     padding-bottom: 30px;
+}
+#yourAnswerContainer {
+    padding-top: 60px;
 }
 /* ==========================================================================
    Helper classes
