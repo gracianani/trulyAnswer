@@ -5,46 +5,65 @@
             <img src='{{headImageUrl}}' class="img-circle user-avatar" />
         </div>
         <p>
-        {{userName}}向你承诺<br /><span id="remainingTime">{{remainingTime}}</span> 秒内有问必答
+        {{^isExpired}}
+        {{userName}}向你承诺<br /><span id="remainingTime">{{ExpiresInSeconds}}</span> 秒内有问必答
+        {{/isExpired}}
+        {{#isExpired}}
+            {{^isFinished}}
+                诚实守信的{{userName}}回答了所有问题<br />
+                <a class="restart">点击发起你的有问必答</a>
+            {{/isFinished}}
+            {{^isFinished}}
+                {{userName}}承诺有问必答<br />
+                <a class="btn-share">提醒Ta还有未回答的问题哦</a>
+            {{/isFinished}}            
+        {{/isExpired}}
         </p>
     </div>
 </div>
 
 {{#yourAnswer}}
 <div id="yourAnswerContainer">
-<h3>你的问题</h3>
+<h3 class="pl15">你的问题</h3>
 <ul class="comments">
 <li id="yourAnswer" class="comment clearfix"  data-entranceAnimation="fadeInDown">
     <div class="comment-col-1">
         <div class="avatar">
-            <div class="avatarBackground backgroundColor-{{getRandomColorWithoutVanilla}}">
+            <div class="avatarBackground backgroundColor-{{userAnswerBackground}}">
              </div>
-             <img src="app/img/secret/avatar-{{getRandomIcon}}@2x.png" />
+             <img src="app/img/secret/avatar-{{userAnswerIcon}}@2x.png" />
         </div>
     </div>
     <div class="comment-col-2">
             <div class="comment-content">{{userAnswerText}}</div>
             {{#repliedByUserAnswers}}
-            <div class="comment-reply">{{userAnswerText}}</div>
+            <div class="comment-reply">
+                <div class="comment-col-1 pull-left">
+                        <img src='{{headImageUrl}}' class="img-circle user-avatar" />
+                </div>
+                <div class="comment-col-2 pull-left">
+                        {{userAnswerText}}
+                </div>
+            </div>
             {{/repliedByUserAnswers}}
             {{^repliedByUserAnswers}}
             <div class="comment-waiting">等待{{userName}}回答...</div>
             {{/repliedByUserAnswers}}
     </div>
     {{^repliedByUserAnswers}}
-    <button id="remindUser" class="btn btn-default btn-sm  btn-share">提醒Ta</button>
+    <a id="remindUser" class="btn btn-sm  btn-share">微信提醒Ta</a>
     {{/repliedByUserAnswers}}
     
 </li>
 </ul>
 </div>
 {{/yourAnswer}}
-
+{{^isExpired}}
 {{^yourAnswer}}
 <div id="createAnswer">
     <div  class="container">
     <input  id="newUserAnswer" placeholder="我想问..." class="form-control input-lg" type="text" />
-    <button id="btnAsk" class="btn btn-default btn-block">就问这个了</button>
+    <a id="btnAsk" class="btn btn-default btn-block">就问这个了</a>
     </div>
 </div>
 <div id="answerTips">
@@ -56,15 +75,22 @@
         </ul>
 </div>
 {{/yourAnswer}}
-
+{{/isExpired}}
 {{#yourAnswer}}
 <div id="allAnswers">
-    <h3>所有问题</h3>
+    <h3 class="pl15">所有问题</h3>
     <ul id="userAnswerWrapper" class="comments">
     {{#userAnswers}}
         {{> userAnswer}}
     {{/userAnswers}}
     </ul>
+    {{^isExpired}}
+    <a class="btn btn-link btn-block btn-share">让其他朋友来提问</a>
+    {{/isExpired}}
 </div>
 {{/yourAnswer}}
+
+</div>
+<div class="startActivity restart">
+我来发起
 </div>

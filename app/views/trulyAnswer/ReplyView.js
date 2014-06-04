@@ -28,7 +28,9 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
             // View Event Handlers
             events: {
                 "click .reply": "reply",
-                "click .unreplied":"onTapUserAnswer"
+                "click .unreplied":"onTapUserAnswer",
+                "click #replyShareOnCircle":"showShareOverlay",
+                "click #restart": "onTapRestart"
             },
 
             loadQuestion: function (options) {
@@ -51,6 +53,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
             },
             // Renders the view's template to the UI
             render: function () {
+                this.beforeRender();
                 // Dynamically updates the UI with the view's template
                 this.$el.html(Mustache.render(template, this.question.toJSON()));
                 this.trigger("render");
@@ -59,8 +62,15 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
             },
 
             reply: function (e) {
-                var repliedToUserAnswerId = $(e.target).data("useranswerid");
-                var userAnswerText = $(e.target).prev("textarea").val();
+                if ( this.validateInput() ) {
+                    this.submitReply(e);
+                } else {
+                    alert("回答不能为空");
+                }
+            },
+            submitReply: function(e) {
+                var repliedToUserAnswerId = $(e.currentTarget).data("useranswerid");
+                var userAnswerText = $(e.currentTarget).prev("textarea").val();
                 var reply = new UserAnswer({ "questionShareCode": this.question.get("shareCode"), "questionTypeId" : 1, "userId": this.user.get("userId"), "repliedToUserAnswerId": repliedToUserAnswerId, "userAnswerText": userAnswerText });
                 reply.addReply({
                     success: function (data) {
@@ -69,7 +79,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
                     error: function (msg) {
                         alert(msg);
                     }
-                });
+                });                
             },
             postRender: function() {
                 var titleText = Utils.getRandomItemFromArray(Configs.titleTexts);
@@ -85,13 +95,28 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
                 }
                 this.startCountDown();
             },
+            beforeRender: function() {
+                var remainingTime = this.question.get("ExpiresInSeconds");
+                if ( remainingTime && remainingTime > 0 ) {
+                    this.question.set("isExpired", false );
+                } else {
+                    this.question.set("isExpired", true );
+                }
+                
+                if ( this.question.get("isExpired") && this.question.get("numOfQuestionsToAnswer") < 1 ) {
+                    this.question.set("isFinished", true );
+                } else {
+                    this.question.set("isFinished", false );
+
+                }
+            },
             startCountDown: function() {
                 var self = this;
                 var $remainingTimeEl = this.$el.find("#remainingTime");
-                var remainingTime = this.question.get("remainingTime");
+                var remainingTime = this.question.get("ExpiresInSeconds");
                 var timer;
                 
-                if ( remainingTime && remainingTime > 0 ) {
+                if ( !this.question.get("isExpired") ) {
                     timer = setInterval(function(){
                         remainingTime --;
                         $remainingTimeEl.text(remainingTime);
@@ -103,10 +128,37 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
                 ev.stopPropagation();
                 $answerEl = $(ev.currentTarget);
                 this.$el.find(".comment-reply-form.current").removeClass("current").addClass("hidden");
-                this.$el.find(".comment-waiting.hidden").removeClass("hidden");
+                this.$el.find(".comment-reply-tip.hidden").removeClass("hidden");
                 
-                $answerEl.find(".comment-waiting").addClass("hidden");
+                $answerEl.find(".comment-reply-tip").addClass("hidden");
                 $answerEl.find(".comment-reply-form").removeClass("hidden").addClass("current");
+            },
+            onTapRestart: function(ev) {
+                ev.preventDefault();
+                ev.stopPropagation();
+                Backbone.history.navigate("", { trigger: false, replace: false });
+                window.location.reload();
+            },
+            showShareOverlay: function(ev) {
+                ev.preventDefault();
+                ev.stopPropagation();
+                var self = this;
+                $('#stage').addClass("blur"); 
+                $('.overlay').fadeIn();  
+                $('.overlay').click(function(e){
+                    $('.overlay').hide();
+                    $('#stage').removeClass("blur"); 
+                });
+            },
+            validateInput: function() {
+                var self = this;
+                var input =  $("textarea:visible").val();
+
+                if ( input && input.length > 0 ) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
 
         });

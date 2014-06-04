@@ -42,7 +42,7 @@ define(["jquery", "backbone", "jquerycookie", "Utils"],
                         self.set(data);
                         self.trigger("onFetchSuccess");
                         self.set("isFetchSuccess", true);
-                        
+                        console.log(data);
                         if (options && options.success) {
                             options.success();
                         }
@@ -61,7 +61,7 @@ define(["jquery", "backbone", "jquerycookie", "Utils"],
                         self.set(data);
                         self.trigger("onFetchSuccess");
                         self.set("isFetchSuccess", true);
-                        
+                        console.log(data);
                         if (options && options.success) {
                             options.success();
                         }                        

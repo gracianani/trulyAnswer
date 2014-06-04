@@ -36,7 +36,6 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
                             }
                             else {
                                 self.question.set(data);
-                                self.question.calculateRemainingTime();
                                 self.question.set({
                                     "QuestionTips": Utils.shufferArray(Configs.QuestionTips)
                                 });
@@ -53,7 +52,8 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
             events: {
                 "click #btnAsk": "ask",
                 "click .tips": "onTapATip",
-                "click #remindUser": "showShareOverlay"
+                "click .btn-share": "showShareOverlay",
+                "click .restart" : "onTapRestart"
             },
 
             appendAnswer: function (data) {
@@ -62,7 +62,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
 
             // Renders the view's template to the UI
             render: function () {
-
+                this.beforeRender();
                 this.$el.html(Mustache.render(template, this.question.toJSON(), { userAnswer: UserAnswerTemplate }));
                 
                 this.trigger("render");
@@ -74,31 +74,67 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
                 var titleText = Utils.getRandomItemFromArray(Configs.titleTexts);
                 var descText = Utils.getRandomItemFromArray(Configs.descTexts);
                 
-                shareInfo.title = titleText.titleBefore + this.user.get("userName") + titleText.titleAfter;
+                shareInfo.title = titleText.titleBefore + this.question.get("userName") + titleText.titleAfter;
                 shareInfo.desc =  descText.descBefore + this.question.get("expiresIn") + descText.descAfter;
                 shareInfo.shareTimelineTitle = shareInfo.title + shareInfo.desc;
                 shareInfo.link = window.location.href;
                 
                 if ( ! titleText.useDefaultImg ) {
-                    shareInfo.img_url = this.user.get("headImageUrl");
+                    shareInfo.img_url = this.question.get("headImageUrl");
                 }
                 this.startCountDown();
             },
+            beforeRender: function() {
+                var remainingTime = this.question.get("ExpiresInSeconds");
+                if ( remainingTime && remainingTime > 0 ) {
+                    this.question.set("isExpired", false );
+                } else {
+                    this.question.set("isExpired", true );
+                }
+                if ( this.question.get("isExpired") && this.question.get("numOfQuestionsToAnswer") < 1 ) {
+                    this.question.set("isFinished", true );
+                } else {
+                    this.question.set("isFinished", false );
+
+                }
+            },
             onTapATip: function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 this.$el.find("#newUserAnswer").val( $(e.currentTarget).text() );
                 this.$el.find("#btnAsk").focus();
             },
-            showShareOverlay: function() {
+            showShareOverlay: function(e) {
+                e.preventDefault();
+                e.stopPropagation();
                 var self = this;
                 $('#stage').addClass("blur"); 
                 $('.overlay').fadeIn();  
                 $('.overlay').click(function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
                     $('.overlay').hide();
                     $('#stage').removeClass("blur"); 
                 });
             },
-            ask: function () {
+            ask: function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if ( this.validateInput() ) {
+                    this.submitAnswer();
+                } else {
+                    alert("请输入问题");
+                }
+                
+                
+            },
+            onTapRestart: function(ev) {
+                ev.preventDefault();
+                ev.stopPropagation();
+                Backbone.history.navigate("", { trigger: false, replace: false });
+                window.location.reload();
+            },
+            submitAnswer: function() {
                 this.userAnswerText = this.$el.find("#newUserAnswer").val();
                 if ( this.userAnswerText && this.userAnswerText === "" ) {
                     
@@ -112,29 +148,42 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
                     });
                     ask.addAnswer({
                         success: function (data) {
+                            console.log(data);
+                            if ( data.answerId ) {
+                                self.question.get("userAnswers").push(data);
+                                window.location.reload();
+                            } else {
+                                alert("提交失败，请稍候重试");
+                            }
                             
-                            self.question.get("userAnswers").push(data);
-                            window.location.reload();
                         },
                         error: function (msg) {
                             alert(msg);
                         }
                     });
                 }
-                
-                
             },
             startCountDown: function() {
                 var self = this;
                 var $remainingTimeEl = this.$el.find("#remainingTime");
-                var remainingTime = this.question.get("remainingTime");
+                var remainingTime = this.question.get("ExpiresInSeconds");
                 var timer;
                 
-                if ( remainingTime && remainingTime > 0 ) {
+                if ( this.question.get("isExpired") ) {
                     timer = setInterval(function(){
                         remainingTime --;
                         $remainingTimeEl.text(remainingTime);
                     }, 1000);
+                }
+            },
+            validateInput: function() {
+                var self = this;
+                var input =  this.$el.find("#newUserAnswer").val();
+
+                if ( input && input.length > 0 ) {
+                    return true;
+                } else {
+                    return false;
                 }
             }
 

@@ -23,15 +23,17 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
 
             // View Event Handlers
             events: {
-
+                
                 "click #confirmAndAsk": "shareOnCircle",
-                "click #shareOnCircle": "showShareOverlay"
+                "click #shareOnCircle": "showShareOverlay",
+                "click #validThrough": "onFocusInput",
+                "blur #validThrough": "onBlurInput"
 
             },
 
             // Renders the view's template to the UI
             render: function () {
-
+                this.beforeRender();
                 // Dynamically updates the UI with the view's template
                 this.$el.html(Mustache.render(template, this.user.toJSON()));
                 this.trigger("render");
@@ -41,10 +43,29 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
             postRender: function() {
                 shareInfo.title = this.user.get("userName") + ":" + shareInfo.title;
                 shareInfo.shareTimelineTitle = this.user.get("userName") + ":"  + shareInfo.shareTimelineTitle;
+                if ( !this.user.get("isMale") ) {
+                    shareInfo.img_url = "http://quiz.seemeloo.com:908/app/img/W.png";
+                }
+            },
+            beforeRender: function() {
+                var sex = this.user.get("sex");
+                var subscribe = this.user.get("subscribe");
+                
+                if ( sex === 1 ) {
+                    this.user.set("isMale", true);
+                } else {
+                    this.user.set("isMale", false);
+                }
+                
+                if ( subscribe === 0 ) {
+                    this.user.set("isSubscribe", false);
+                } else {
+                    this.user.set("isSubscribe", true);
+                }
             },
             showSuccessInfo: function() {
-                var titleText = Utils.getRandomItemFromArray(Configs.titleTexts);
-                var descText = Utils.getRandomItemFromArray(Configs.descTexts);
+                var titleText = Configs.titleTexts[0];
+                var descText = Configs.descTexts[0];
                 
                 shareInfo.title = titleText.titleBefore + this.user.get("userName") + titleText.titleAfter;
                 shareInfo.desc =  descText.descBefore + this.question.get("expiresIn") + descText.descAfter;
@@ -64,26 +85,53 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
                 $('.overlay').click(function(e){
                     $('.overlay').hide();
                     $('#stage').removeClass("blur"); 
+                    
+                    window.location.reload();
                 });
             },
-            shareOnCircle: function () {
+            validateInput: function() {
+                var input = parseInt(this.$el.find("#validThrough").val());
+                if ( input && !isNaN(input) && input > 0 && input < 49) {
+                    return true;
+                } else {
+                    return false;
+                }
+                
+            },
+            onFocusInput: function(ev) {
+                this.$el.find(".form-group").removeClass("has-error");
+                this.$el.find(".control-label").text("输入有效时间，马上开始有问必答");
+            },
+            onBlurInput: function(ev) {
+                
+            },
+            startActivity: function() {
                 var self = this;
                 this.question = new Question({ "questionTypeId": 1, "userId": this.user.get("userId"), "questionText" : "有问必答" });
                 var expiresIn = $("#validThrough").val();
                 this.question.set("expiresIn", expiresIn);
                 this.question.addQuestion({
                     success: function (data) {
-             
-                        
+                 
+                            
                         self.shareCode = data.shareCode;
                         Backbone.history.navigate("trulyAnswer/reply/" + data.shareCode, { trigger: false, replace: true });
                         self.showSuccessInfo();
-
-                    },
-                    error: function (msg) {
+    
+                },
+                error: function (msg) {
                         alert(msg);
-                    }
-                });
+                }
+                });                
+            },
+            shareOnCircle: function () {
+                var self = this;
+                if ( this.validateInput() ) {
+                    this.startActivity();
+                } else {
+                    this.$el.find(".form-group").addClass("has-error");
+                    this.$el.find(".control-label").text("请输入1-48以内的数字");
+                }
             }
 
         });

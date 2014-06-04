@@ -112,6 +112,9 @@ body {
     font-size: 14px;
     line-height: 1.4em;
 }
+a,.btn,.btn-link {
+    color: #0abab5;
+}
 .btn {
     border-radius: .2rem;
     padding: 15px 10px;
@@ -122,6 +125,10 @@ body {
 .btn-defualt {
     color: #fff;
     background-color: #444;
+}
+.btn.disabled {
+    color: #333;
+    border:1px solid #dedede;
 }
 
 button, input, optgroup, select, textarea {
@@ -174,7 +181,7 @@ button, input, optgroup, select, textarea {
 }
 #start-user {
     font-size: 18px;
-    margin-bottom: 1em;
+    margin-bottom: 0.2em;
     margin-top: 1em;
     vertical-align: middle;
     line-height: 24px;
@@ -192,7 +199,10 @@ button, input, optgroup, select, textarea {
     margin: 0.5em 0 0;
     color: #999;
 }
-
+.control-label {
+    font-weight: normal;
+    color: #999;
+}
 #reply-rule {
     margin: 10px 0 20px;
     text-align: left;
@@ -212,14 +222,22 @@ button, input, optgroup, select, textarea {
     max-width: none;
 }
 h3 {
-    font-size: 20px;
+    font-size: 16px;
     text-align: left;
     margin-top: 15px;
+}
+.pl15 {
     padding-left: 15px;
 }
+h3 small {
+    font-size: 12px;
+}
 em {
-    color: #df6880;
+    color: #0abab5;
     font-style: normal;
+}
+.btn-default:hover em {
+    color: #FFF;
 }
 #ask h3 {
     position: relative;
@@ -270,7 +288,6 @@ em {
     padding: 0;
 }
 .comments .comment:first-child {
-    border-top: 1px dashed #dadada;
 }
 .comment {
     padding: 1.5em 0;
@@ -284,7 +301,7 @@ em {
     background-color: #F0F0F0;
 }
 .tips:active,.tips:focus,.tips:hover {
-   color: #df6880;
+   color: #0abab5;
    background-color: #FFF;
 }
 .comment-col-1, .comment-col-2 {
@@ -302,8 +319,8 @@ em {
 }
 .comment-content {
     text-align: left;
-    font-size: 1.2em;
-    line-height: 1.5em;
+    font-size: 1em;
+    line-height: 1.4em;
     padding: 2px 0;
 }
 .comment-reply {
@@ -311,10 +328,27 @@ em {
     padding-top: 10px;
     border-top: 1px dashed #dedede;
     margin-top: 10px;
+    color: #777;
+}
+.comment-reply .comment-col-1 {
+    padding-left: 0;
+    width: 40px;
+}
+.comment-reply-tip {
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    margin-top:-20px;
+}
+.comment-reply .user-avatar {
+    position: relative;
+    left: -10px;
+    top:-3px;
 }
 .comment-waiting {
     color: #999;
     text-align: left;
+    font-size: 0.9em;
 }
 .comment-reply-form {
     padding: 15px 0;
@@ -325,9 +359,13 @@ em {
 
 .unreplied {
     cursor: pointer;
+    background-color: #f0f0f0;
 }
 .unreplied:hover,.unreplied:active {
-    color:#df6880;
+
+}
+.unreplied .comment-col-2 {
+    position: relative;
 }
 #remindUser {
     position: absolute;
@@ -395,6 +433,7 @@ em {
     width: 100px;
     margin-bottom: 20px;
 }
+
 /*Cobalt Skyfall Aquamarine Olive Cash EmeraldSea Hopscotch Lavender Burst Cupid Peony Midnight  Vanilla */
 
 .backgroundColor-Cobalt,
@@ -586,7 +625,7 @@ em {
     color: #FFF;
 }
 .btn-default:hover,.btn-default:active {
-    background-color: #df6880;
+    background-color: #0abab5;
     color: #FFF;
 }
 .post-subTitle {
@@ -647,6 +686,23 @@ em {
 #yourAnswerContainer {
     padding-top: 60px;
 }
+.startActivity {
+    position: fixed;
+    right: 10px;
+    bottom: -5px;
+    width: 70px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #444;
+    color: #FFF;
+    z-index: 1;
+    text-align: center;
+    font-size: 1.2em;
+}
+.btn-share,.restart {
+    cursor: pointer;
+}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */

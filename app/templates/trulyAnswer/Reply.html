@@ -4,40 +4,58 @@
             <img src='{{headImageUrl}}' class="img-circle user-avatar" />
         </div>
         <p>
-        {{userName}}向亲友承诺，<br /><span id="remainingTime">1000</span>秒内{{questionText}}
+        {{userName}}, 
+        {{#isFinished}}
+            你做到了有问必答，太棒了！
+        {{/isFinished}}
+        {{^isFinished}}
+            你有 <em>{{numOfQuestionsToAnswer}}</em> 个问题等待回答
+        {{/isFinished}}
+        <br />
+        {{#isExpired}}
+        截止时间已过，<a id="restart">点此再玩一次</a>
+        {{/isExpired}}
+        {{^isExpired}}
+        剩余时间 <span id="remainingTime">{{ExpiresInSeconds}}</span> 秒
+        {{/isExpired}}
         </p>
     </div>
 
-    <h3><small>有 {{numOfQuestionsToAnswer}} 个问题等待回答</small></h3>
+    <div class="container">
+    <h3><small>所有人都只能看到自己问题的答案。</small></h3>
+    </div>
 
     {{^userAnswers}}
         <div id="shareTips" class="container">
                 <big>伤感，还没有人提问...</big>
-                <p>马上分享， 让朋友<em>匿名</em>提问吧！</p>
-                <p><a href="javascript:void(0)" id="replyShareOnCircle" class="btn btn-default btn-block btn-share" >分享到朋友圈</a></p>
         </div>
     {{/userAnswers}}  
 
     <ul class="comments">
         {{#userAnswers}}
-        <li class="comment clearfix userAnswer {{^repliedByUserAnswers}}unreplied bg-warning{{/repliedByUserAnswers}}" >
+        <li class="comment clearfix userAnswer {{^repliedByUserAnswers}}unreplied{{/repliedByUserAnswers}}" >
             <div class="comment-col-1">
                 <div class="avatar">
-                    <div class="avatarBackground backgroundColor-{{getRandomColorWithoutVanilla}}">
+                    <div class="avatarBackground backgroundColor-{{userAnswerBackground}}">
                      </div>
-                     <img src="app/img/secret/avatar-{{getRandomIcon}}@2x.png" />
+                     <img src="app/img/secret/avatar-{{userAnswerIcon}}@2x.png" />
                 </div>
             </div>
             <div class="comment-col-2">
                 <div class="comment-content">{{userAnswerText}}</div>
                 
                 {{#repliedByUserAnswers}}
-                <div class="comment-reply">
-                你的回答：{{userAnswerText}} 
+                <div class="comment-reply clearfix">
+                    <div class="comment-col-1 pull-left">
+                        <img src='{{headImageUrl}}' class="img-circle user-avatar" />
+                    </div>
+                    <div class="comment-col-2 pull-left">
+                        {{userAnswerText}}
+                    </div>
                 </div>
                 {{/repliedByUserAnswers}}
                 {{^repliedByUserAnswers}}
-                <div class="comment-waiting">点击即可回答</div>
+                <div class="comment-reply-tip btn btn-default btn-sm">回答</div>
                 <div class="comment-reply-form hidden">
                     <textarea placeholder="真诚的回答" class="form-control" rows="2"></textarea>
                     <button class="reply btn btn-default btn-block btn-sm" id="reply-{{userAnswerId}}" data-useranswerid={{userAnswerId}}>好</button>
@@ -47,6 +65,6 @@
         </li>
         {{/userAnswers}}
     </ul>
-
+    <p><a  id="replyShareOnCircle" class="btn btn-link btn-block btn-share">请朋友<em>匿名</em>提问</a></p>
 
 </div>

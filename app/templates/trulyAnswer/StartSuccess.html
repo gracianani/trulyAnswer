@@ -3,10 +3,15 @@
     <h3>快成功了！只剩下两步：</h3>
     <ol>
     <li>分享到朋友圈， 召唤朋友<em>匿名</em>提问</li>
-    <li>关注公众号「秘密」，查看朋友们直击心灵的问题</li>
+    <li>关注公众号<a href="http://mp.weixin.qq.com/s?__biz=MzA5ODY5MzIzMA==&mid=200230676&idx=1&sn=7517bd9d512a8333346b47b6f3ff2747&key=aae2f692d81876842492be4613bb0da3c338e12488baf5731de5fb51ae2bd303a584a9d49a9c84b60523e93a545da707&ascene=1&uin=MTMyMDI1Mjk4Mg%3D%3D">「秘密Secret」</a>，查看朋友们直击心灵的问题</li>
     </ol>
     <div id="reply-action" class="clearfix">
         <a href="javascript:void(0)" id="shareOnCircle" class="btn btn-default pull-left btn-share" >分享到朋友圈</a>
-        <a href="javascript:void(0)" id="follow" class="btn btn-default pull-right" >关注秘密公众号</a>
+        {{#isSubscribe}}
+            <a href="http://mp.weixin.qq.com/s?__biz=MzA5ODY5MzIzMA==&mid=200230676&idx=1&sn=7517bd9d512a8333346b47b6f3ff2747&key=aae2f692d81876842492be4613bb0da3c338e12488baf5731de5fb51ae2bd303a584a9d49a9c84b60523e93a545da707&ascene=1&uin=MTMyMDI1Mjk4Mg%3D%3D" id="follow" class="btn disabled pull-right" >&radic; 已关注公众号</a>
+        {{/isSubscribe}}
+        {{^isSubscribe}}
+            <a href="http://mp.weixin.qq.com/s?__biz=MzA5ODY5MzIzMA==&mid=200230676&idx=1&sn=7517bd9d512a8333346b47b6f3ff2747&key=aae2f692d81876842492be4613bb0da3c338e12488baf5731de5fb51ae2bd303a584a9d49a9c84b60523e93a545da707&ascene=1&uin=MTMyMDI1Mjk4Mg%3D%3D" id="follow" class="btn btn-default pull-right" >关注公众号</a>
+        {{/isSubscribe}}
     </div>
 </div>

@@ -1,20 +1,28 @@
 ﻿<div id="start" class="container">
 <div id="start-cover">
+    {{#isMale}}
     <img src="app/img/M.png" id="start-cover-img" />
+    {{/isMale}}
+    {{^isMale}}
+    <img src="app/img/W.png" id="start-cover-img" />
+    {{/isMale}}
 </div>
 <div id="startContent">
     <p id="start-intro">
     </p>
     <p id="start-user" class="clearfix">
         <img src='{{headImageUrl}}' class="img-circle user-avatar"  /> 
-        {{userName}}<br /><small>愿意向亲友敞开心扉</small>
-    </p>
+        {{userName}}</p>
+    <div class="form-group">
+    <label class="control-label" for="validThrough">输入有效时间，马上开始有问必答</label>
     <div class="input-group input-group-lg" id="start-formgroup">
-          <input type="number" class="form-control" id="validThrough" name="validThrough" placeholder="有效时间" />
+          <input type="number" class="form-control" id="validThrough" name="validThrough" placeholder="有效时间" min="1" max="48" pattern="\d*"/>
           <span class="input-group-addon">小时</span>
     </div>
     
-    <a href="javascript:void(0)" id="confirmAndAsk" class="btn btn-block btn-lg btn-default" >开始有问必答</a>
+    </div>
+    
+    <a href="javascript:void(0)" id="confirmAndAsk" class="btn btn-block btn-lg btn-default" >开始</a>
 
 
 </div>
