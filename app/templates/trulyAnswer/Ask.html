@@ -89,7 +89,21 @@
     {{/isExpired}}
 </div>
 {{/yourAnswer}}
-
+{{^yourAnswer}}
+    {{#isExpired}}
+        <div id="allAnswers">
+            <h3 class="pl15">所有问题</h3>
+            <ul id="userAnswerWrapper" class="comments">
+            {{#userAnswers}}
+                {{> userAnswer}}
+            {{/userAnswers}}
+            </ul>
+            {{^isExpired}}
+            <a class="btn btn-link btn-block btn-share">让其他朋友来提问</a>
+            {{/isExpired}}
+        </div>
+    {{/isExpired}}
+{{/yourAnswer}}
 </div>
 <div class="startActivity restart">
 我来发起

@@ -155,12 +155,12 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
                     });
                     ask.addAnswer({
                         success: function (data) {
-                            console.log(data);
-                            if ( data.answerId ) {
+                            if ( data.questionTypeId ) {
                                 self.question.get("userAnswers").push(data);
                                 window.location.reload();
                             } else {
                                 alert("提交失败，请稍候重试");
+                                $("#btnAsk").removeClass("disabled");
                             }
                             
                         },
@@ -176,7 +176,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
                 var remainingTime = this.question.get("ExpiresInSeconds");
                 var timer;
                 
-                if ( this.question.get("isExpired") ) {
+                if ( !this.question.get("isExpired") ) {
                     timer = setInterval(function(){
                         remainingTime --;
                         $remainingTimeEl.text(remainingTime);
