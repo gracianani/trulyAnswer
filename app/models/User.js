@@ -12,7 +12,7 @@ define(["jquery", "backbone", "jquerycookie", "Utils"],
                 if (cookieId) {
                     this.setUserId(cookieId);
                 }
-                this.wechatLoginUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx6721bf58769432ea&redirect_uri=http%3a%2f%2fquiz.seemeloo.com%2fsecretcnwebservices%2fsecretservice%2fusers%2fwechat%2f&response_type=code&scope=snsapi_userinfo&state=TOREPLACE#wechat_redirect";
+                this.wechatLoginUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb7f74b81b6e5ef76&redirect_uri=http%3a%2f%2fquiz.seemeloo.com%2fsecretcnreleasewebservices%2fsecretservice%2fusers%2fwechat%2f&response_type=code&scope=snsapi_userinfo&state=TOREPLACE#wechat_redirect";
             },
             setUserId: function (userId) {
                 this.set("userId", userId);

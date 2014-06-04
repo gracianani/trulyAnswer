@@ -7,7 +7,7 @@ module.exports = function (grunt) {
             overwrite: true,
             replacements: [{
                 from: "http://192.168.1.103:9009/secretService",
-                to: "http://quiz.seemeloo.com/secretcnWebServices/secretService"
+                to: "http://quiz.seemeloo.com/secretcnReleaseWebServices/secretService"
             }]
         }
     },
