@@ -1,6 +1,6 @@
 ﻿// StartView.js
 // -------
-define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html","text!templates/trulyAnswer/StartSuccess.html", "models/Question","Utils","views/trulyAnswer/Configs"],
+define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html", "text!templates/trulyAnswer/StartSuccess.html", "models/Question", "Utils", "views/trulyAnswer/Configs"],
 
     function ($, Backbone, Mustache, template, successTemplate, Question, Utils, Configs) {
 
@@ -18,7 +18,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
                 } else {
                     this.listenTo(this.user, "onFetchSuccess", this.render);
                 }
-                
+
             },
 
             // View Event Handlers
@@ -40,7 +40,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
                 // Maintains chainability
                 return this;
             },
-            postRender: function() {
+            postRender: function () {
                 shareInfo.title = this.user.get("userName") + ":" + shareInfo.title;
                 shareInfo.shareTimelineTitle = this.user.get("userName") + ":"  + shareInfo.shareTimelineTitle;
                 if ( !this.user.get("isMale") ) {
@@ -68,25 +68,26 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
                 var descText = Configs.descTexts[0];
                 
                 shareInfo.title = titleText.titleBefore + this.user.get("userName") + titleText.titleAfter;
-                shareInfo.desc =  descText.descBefore + this.question.get("expiresIn") + descText.descAfter;
+                shareInfo.desc = descText.descBefore + this.question.get("expiresIn") + descText.descAfter;
                 shareInfo.shareTimelineTitle = shareInfo.title + shareInfo.desc;
                 shareInfo.link = window.location.href;
-                
-                if ( ! titleText.useDefaultImg ) {
+
+                if (!titleText.useDefaultImg) {
                     shareInfo.img_url = this.user.get("headImageUrl");
                 }
-                
+                console.log(this.user.toJSON());
                 this.$el.find("#startContent").html(Mustache.render(successTemplate, this.user.toJSON()));
             },
-            showShareOverlay: function() {
+            showShareOverlay: function () {
                 var self = this;
-                $('#stage').addClass("blur"); 
-                $('.overlay').fadeIn();  
-                $('.overlay').click(function(e){
+                $('#stage').addClass("blur");
+                $('.overlay').fadeIn();
+                $('.overlay').click(function (e) {
                     $('.overlay').hide();
                     $('#stage').removeClass("blur"); 
                     
                     window.location.reload();
+
                 });
             },
             validateInput: function() {
@@ -107,19 +108,18 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
             },
             startActivity: function() {
                 var self = this;
-                this.question = new Question({ "questionTypeId": 1, "userId": this.user.get("userId"), "questionText" : "有问必答" });
+                this.question = new Question({ "questionTypeId": 1, "userId": this.user.get("userId"), "questionText": "有问必答" });
                 var expiresIn = $("#validThrough").val();
                 this.question.set("expiresIn", expiresIn);
                 this.question.addQuestion({
-                    success: function (data) {
-                 
-                            
+                    success: function (data) {                   
                         self.shareCode = data.shareCode;
                         Backbone.history.navigate("trulyAnswer/reply/" + data.shareCode, { trigger: false, replace: true });
                         self.showSuccessInfo();
     
                 },
                 error: function (msg) {
+
                         alert(msg);
                 }
                 });                
