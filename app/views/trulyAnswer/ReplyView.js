@@ -27,7 +27,8 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
 
             // View Event Handlers
             events: {
-                "click .reply": "reply"
+                "click .reply": "reply",
+                "click .unreplied":"onTapUserAnswer"
             },
 
             loadQuestion: function (options) {
@@ -96,6 +97,16 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
                         $remainingTimeEl.text(remainingTime);
                     }, 1000);
                 }
+            },
+            onTapUserAnswer: function(ev) {
+                ev.preventDefault();
+                ev.stopPropagation();
+                $answerEl = $(ev.currentTarget);
+                this.$el.find(".comment-reply-form.current").removeClass("current").addClass("hidden");
+                this.$el.find(".comment-waiting.hidden").removeClass("hidden");
+                
+                $answerEl.find(".comment-waiting").addClass("hidden");
+                $answerEl.find(".comment-reply-form").removeClass("hidden").addClass("current");
             }
 
         });
