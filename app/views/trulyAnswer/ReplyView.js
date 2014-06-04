@@ -62,10 +62,15 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
             },
 
             reply: function (e) {
-                if ( this.validateInput() ) {
-                    this.submitReply(e);
-                } else {
-                    alert("回答不能为空");
+                if( !$(e.currentTarget).hasClass("disabled") ) {
+                    $(e.currentTarget).addClass("disabled");
+                    if ( this.validateInput() ) {
+                        this.submitReply(e);
+                    } else {
+                        alert("回答不能为空");
+                        $(e.currentTarget).removeClass("disabled");
+                    }
+                
                 }
             },
             submitReply: function(e) {

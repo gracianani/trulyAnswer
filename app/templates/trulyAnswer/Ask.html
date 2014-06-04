@@ -9,13 +9,13 @@
         {{userName}}向你承诺<br /><span id="remainingTime">{{ExpiresInSeconds}}</span> 秒内有问必答
         {{/isExpired}}
         {{#isExpired}}
-            {{^isFinished}}
+            {{#isFinished}}
                 诚实守信的{{userName}}回答了所有问题<br />
                 <a class="restart">点击发起你的有问必答</a>
             {{/isFinished}}
             {{^isFinished}}
                 {{userName}}承诺有问必答<br />
-                <a class="btn-share">提醒Ta还有未回答的问题哦</a>
+                <a class="btn-share">但没有完成 ╭(╯^╰)╮</a>
             {{/isFinished}}            
         {{/isExpired}}
         </p>

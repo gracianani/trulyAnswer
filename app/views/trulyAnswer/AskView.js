@@ -120,11 +120,18 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
             ask: function (e) {
                 e.preventDefault();
                 e.stopPropagation();
-                if ( this.validateInput() ) {
-                    this.submitAnswer();
-                } else {
-                    alert("请输入问题");
+                
+                if( !$(e.currentTarget).hasClass("disabled") ) {
+                
+                    $(e.currentTarget).addClass("disabled");
+                    if ( this.validateInput() ) {
+                        this.submitAnswer();
+                    } else {
+                        alert("请输入问题");
+                        $(e.currentTarget).removeClass("disabled");
+                    }                    
                 }
+
                 
                 
             },

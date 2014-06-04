@@ -124,13 +124,19 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
                 }
                 });                
             },
-            shareOnCircle: function () {
-                var self = this;
-                if ( this.validateInput() ) {
-                    this.startActivity();
-                } else {
-                    this.$el.find(".form-group").addClass("has-error");
-                    this.$el.find(".control-label").text("请输入1-48以内的数字");
+            shareOnCircle: function (ev) {
+                if ( !$(ev.currentTarget).hasClass("disabled") ) {
+                    
+                    $(ev.currentTarget).addClass("disabled");
+                    var self = this;
+                    if ( this.validateInput() ) {
+                        this.startActivity();
+                    } else {
+                        this.$el.find(".form-group").addClass("has-error");
+                        this.$el.find(".control-label").text("请输入1-48以内的数字");
+                        $("#confirmAndAsk").removeClass("disabled");
+                    }
+                
                 }
             }
 
