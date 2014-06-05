@@ -19,7 +19,7 @@ define(["jquery", "backbone"],
             addAnswer: function (options) {
                 var self = this;
                 $.ajax({
-                    url: "http://192.168.1.103:9009/secretService/UserAnswers",
+                    url: "http://quiz.seemeloo.com/secretcnReleaseWebServices/secretService/UserAnswers",
                     dataType: "json",
                     data: JSON.stringify({
                         userId: self.get("userId"),
@@ -42,7 +42,7 @@ define(["jquery", "backbone"],
             addReply: function (options) {
                 var self = this;
                 $.ajax({
-                    url: "http://192.168.1.103:9009/secretService/UserAnswers",
+                    url: "http://quiz.seemeloo.com/secretcnReleaseWebServices/secretService/UserAnswers",
                     dataType: "json",
                     data: JSON.stringify({
                         userId: self.get("userId"),

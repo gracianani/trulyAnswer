@@ -29,7 +29,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
             events: {
                 "click .reply": "reply",
                 "click .unreplied":"onTapUserAnswer",
-                "click #replyShareOnCircle":"showShareOverlay",
+                "click .btn-share":"showShareOverlay",
                 "click #restart": "onTapRestart"
             },
 

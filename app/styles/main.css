@@ -190,12 +190,13 @@ button, input, optgroup, select, textarea {
     margin-left: -30px;
 }
 .start-text {
-    font-size: 20px;
+    font-size: 22px;
     line-height: 30px;
     color:rgba(255,255,255,0.7);;
     padding: 0 1.5em;
     height: 150px;
     overflow: hidden;
+    letter-spacing: -2px;
 }
 .text-alpha {
     color: rgba(255,255,255,0.2);
@@ -802,20 +803,40 @@ em {
     opacity: 1;
   }
 }
-@-webkit-keyframes textalpha {
+@-webkit-keyframes fadeinup2 {
   0% {
-    color: rgba(255,255,255,0.4);
+    -webkit-transform: translateY(50px);
+    transform: translateY(50px);
+    -webkit-opacity: 0;
+    opacity: 0;
   }
 
-  50% {
-    color: rgba(255,255,255,0.8);
-  }
   100% {
-    color: rgba(255,255,255,0.4);
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-opacity: 1;
+    opacity: 1;
   }
 }
 
-@keyframes textalpha {
+@keyframes fadeinup2 {
+  0% {
+    -webkit-transform: translateY(50px);
+    -ms-transform: translateY(50px);
+    transform: translateY(50px);
+    -webkit-opacity: 0;
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-opacity: 1;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes textbeta {
   0% {
     color: rgba(255,255,255,0.4);
   }
@@ -827,7 +848,20 @@ em {
     color: rgba(255,255,255,0.4);
   }
 }
-@-webkit-keyframes textbeta {
+
+@keyframes textbeta {
+  0% {
+    color: rgba(255,255,255,0.4);
+  }
+
+  50% {
+    color: rgba(255,255,255,0);
+  }
+  100% {
+    color: rgba(255,255,255,0.4);
+  }
+}
+@-webkit-keyframes textalpha {
   0% {
     color: rgba(255,255,255,0.2);
   }
@@ -840,7 +874,7 @@ em {
   }
 }
 
-@keyframes textbeta {
+@keyframes textalpha {
   0% {
     color: rgba(255,255,255,0.2);
   }
@@ -912,32 +946,44 @@ em {
 
 }
 .text-alpha {
-  -webkit-animation: textalpha 5s infinite; /* Safari 4+ */
-  animation:         textalpha 5s infinite; /* IE 10+ */
+  -webkit-animation: textalpha 4s infinite; /* Safari 4+ */
+  animation:         textalpha 4s infinite; /* IE 10+ */
   animation-fill-mode:both;
-  -webkit-animation-fill-mode:both; /* Safari and Chrome */   
+  -webkit-animation-fill-mode:both; /* Safari and Chrome */ 
+  animation-delay:2000ms;
+  -webkit-animation-delay: 2000ms;   
 }
 .text-beta {
-  -webkit-animation: textbeta 4s infinite; /* Safari 4+ */
-  animation:         textbeta 4s infinite; /* IE 10+ */
+  -webkit-animation: textbeta 5s infinite; /* Safari 4+ */
+  animation:         textbeta 5s infinite; /* IE 10+ */
   animation-fill-mode:both;
   -webkit-animation-fill-mode:both; /* Safari and Chrome */   
-  animation-delay:500ms;
-  -webkit-animation-delay: 500ms; 
+  animation-delay:2500ms;
+  -webkit-animation-delay: 2500ms; 
 }
 .text-gamma {
-  -webkit-animation: textgamma 4s infinite; /* Safari 4+ */
-  animation:         textgamma 4s infinite; /* IE 10+ */
+  -webkit-animation: textgamma 3s infinite; /* Safari 4+ */
+  animation:         textgamma 3s infinite; /* IE 10+ */
   animation-fill-mode:both;
-  -webkit-animation-fill-mode:both; /* Safari and Chrome */   
+  -webkit-animation-fill-mode:both; /* Safari and Chrome */ 
+  animation-delay:2000ms;
+  -webkit-animation-delay: 2000ms;   
 }
 .text-zero {
-  -webkit-animation: textzero 6s infinite; /* Safari 4+ */
-  animation:         textzero 6s infinite; /* IE 10+ */
+  -webkit-animation: textzero 4s infinite; /* Safari 4+ */
+  animation:         textzero 4s infinite; /* IE 10+ */
   animation-fill-mode:both;
   -webkit-animation-fill-mode:both; /* Safari and Chrome */   
-  animation-delay:500ms;
-  -webkit-animation-delay: 500ms; 
+  animation-delay:2500ms;
+  -webkit-animation-delay: 2500ms; 
+}
+.start-text {
+  -webkit-animation: fadeinup2 2s; /* Safari 4+ */
+  animation:         fadeinup2 2s; /* IE 10+ */
+  animation-fill-mode:both;
+  -webkit-animation-fill-mode:both; /* Safari and Chrome */   
+  animation-delay:1500ms;
+  -webkit-animation-delay: 1500ms;     
 }
 /* ==========================================================================
    Helper classes

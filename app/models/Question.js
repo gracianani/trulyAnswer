@@ -33,7 +33,7 @@ define(["jquery", "backbone","utils"],
             addQuestion: function (options) {
                 var self = this;
                 $.ajax({
-                    url: "http://192.168.1.103:9009/secretService/Questions",
+                    url: "http://quiz.seemeloo.com/secretcnReleaseWebServices/secretService/Questions",
                     dataType: "json",
                     data: JSON.stringify({
                         userId: self.get("userId"),
@@ -56,7 +56,7 @@ define(["jquery", "backbone","utils"],
             fetchByShareCode: function (options) {
                 var self = this;
                 $.ajax({
-                    url: "http://192.168.1.103:9009/secretService/Questions/" + self.get("shareCode") + "/" + self.get("userId"),
+                    url: "http://quiz.seemeloo.com/secretcnReleaseWebServices/secretService/Questions/" + self.get("shareCode") + "/" + self.get("userId"),
                     dataType: "json",
                     type: "GET",
                     contentType: "application/json; charset=utf-8",

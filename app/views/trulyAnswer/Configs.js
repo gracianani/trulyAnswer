@@ -3,7 +3,7 @@ define(function () {
         "titleTexts" : [
             {
                 "titleBefore" : "",
-                "titleAfter" : ": 问我什么都会回答哦",
+                "titleAfter" : "的真实体重是？",
                 "useDefaultImg" : false
                 
             },
@@ -15,7 +15,7 @@ define(function () {
             },
             {
                 "titleBefore" : "",
-                "titleAfter" : "还是处吗？",
+                "titleAfter" : "还是处么？",
                 "useDefaultImg" : false
                 
             },
@@ -27,6 +27,11 @@ define(function () {
             {
                 "titleBefore" : "",
                 "titleAfter" : "最喜欢yy的明星是谁？",
+                "useDefaultImg" : false
+            },
+            {
+                "titleBefore" : "",
+                "titleAfter" : "最近哭过么？",
                 "useDefaultImg" : false
             }
         ],

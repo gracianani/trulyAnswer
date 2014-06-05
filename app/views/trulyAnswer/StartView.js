@@ -41,8 +41,13 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
                 return this;
             },
             postRender: function () {
-                shareInfo.title = this.user.get("userName") + ":" + shareInfo.title;
-                shareInfo.shareTimelineTitle = this.user.get("userName") + ":"  + shareInfo.shareTimelineTitle;
+                var titleText = Utils.getRandomItemFromArray(Configs.titleTexts);
+                var descText = Utils.getRandomItemFromArray(Configs.descTexts);
+                
+                shareInfo.title = titleText.titleBefore + this.user.get("userName") + titleText.titleAfter;
+                shareInfo.desc = descText.descBefore + "3" + descText.descAfter;
+                shareInfo.shareTimelineTitle = shareInfo.title + shareInfo.desc;
+                shareInfo.link = window.location.href;
                 shareInfo.img_url = this.user.get("headImageUrl");
                 _hmt.push(['_trackPageview', "/start"]);
             },
@@ -70,6 +75,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
                 shareInfo.desc = descText.descBefore + this.question.get("expiresIn") + descText.descAfter;
                 shareInfo.shareTimelineTitle = shareInfo.title + shareInfo.desc;
                 shareInfo.link = window.location.href;
+                shareInfo.img_url = this.user.get("headImageUrl");
 
                 this.$el.find("#startContent").html(Mustache.render(successTemplate, this.user.toJSON()));
             },
@@ -123,14 +129,14 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
             shareOnCircle: function (ev) {
                 if ( !$(ev.currentTarget).hasClass("disabled") ) {
                     
-                    $(ev.currentTarget).addClass("disabled");
+                    $(ev.currentTarget).addClass("disabled").text("正在创建...");
                     var self = this;
                     if ( this.validateInput() ) {
                         this.startActivity();
                     } else {
                         this.$el.find(".form-group").addClass("has-error");
                         this.$el.find(".control-label").text("请输入1-48以内的数字");
-                        $("#confirmAndAsk").removeClass("disabled");
+                        $("#confirmAndAsk").removeClass("disabled").text("现在开始有问必答");
                     }
                 
                 }
