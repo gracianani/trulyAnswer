@@ -39,6 +39,11 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
                                 self.question.set({
                                     "QuestionTips": Utils.shufferArray(Configs.QuestionTips)
                                 });
+        
+                                self.question.set({
+                                    "isSubscribe": (self.user.subscribe !== 0 )
+                                });
+
                                 self.render();
                             }
                         },

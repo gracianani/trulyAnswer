@@ -126,10 +126,11 @@ a,.btn,.btn-link {
     color: #fff;
     background-color: #444;
 }
-.btn.disabled {
+.btn.disabled,.btn:hover.disabled,.btn:active.disabled {
     color: #333;
     border:1px solid #dedede;
 }
+
 
 button, input, optgroup, select, textarea {
     margin: 0;
