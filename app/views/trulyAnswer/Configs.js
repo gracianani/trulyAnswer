@@ -4,7 +4,7 @@ define(function () {
             {
                 "titleBefore" : "",
                 "titleAfter" : ": 问我什么都会回答哦",
-                "useDefaultImg" : true
+                "useDefaultImg" : false
                 
             },
             {

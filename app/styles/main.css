@@ -175,7 +175,7 @@ button, input, optgroup, select, textarea {
 #start-bg {
     width: 100%;
     height: 260px;
-    padding: 40px 0;
+    padding: 30px 0;
     background:url(../../app/img/stars.jpg) center top;
     background-size: 100% auto;
     overflow: hidden;
@@ -185,15 +185,15 @@ button, input, optgroup, select, textarea {
     width: 60px;
     height: 60px;
     position: absolute;
-    bottom: -10px;
+    bottom: -60px;
     left: 50%;
     margin-left: -30px;
 }
 .start-text {
-    font-size: 18px;
+    font-size: 20px;
     line-height: 30px;
     color:rgba(255,255,255,0.7);;
-    padding: 0 2em;
+    padding: 0 1.5em;
     height: 150px;
     overflow: hidden;
 }
@@ -768,6 +768,176 @@ em {
 #bottomAd .pull-right {
     right: -5px;
     top: 10%;
+}
+@-webkit-keyframes fadeinup {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-opacity: 0;
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(-50px);
+    transform: translateY(-50px);
+    -webkit-opacity: 1;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeinup {
+  0% {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-opacity: 0;
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(-50px);
+    -ms-transform: translateY(-50px);
+    transform: translateY(-50px);
+    -webkit-opacity: 1;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes textalpha {
+  0% {
+    color: rgba(255,255,255,0.4);
+  }
+
+  50% {
+    color: rgba(255,255,255,0.8);
+  }
+  100% {
+    color: rgba(255,255,255,0.4);
+  }
+}
+
+@keyframes textalpha {
+  0% {
+    color: rgba(255,255,255,0.4);
+  }
+
+  50% {
+    color: rgba(255,255,255,0);
+  }
+  100% {
+    color: rgba(255,255,255,0.4);
+  }
+}
+@-webkit-keyframes textbeta {
+  0% {
+    color: rgba(255,255,255,0.2);
+  }
+
+  50% {
+    color: rgba(255,255,255,0.1);
+  }
+  100% {
+    color: rgba(255,255,255,0.2);
+  }
+}
+
+@keyframes textbeta {
+  0% {
+    color: rgba(255,255,255,0.2);
+  }
+
+  50% {
+    color: rgba(255,255,255,0.1);
+  }
+  100% {
+    color: rgba(255,255,255,0.2);
+  }
+}
+@-webkit-keyframes textgamma {
+  0% {
+    color: rgba(255,255,255,0);
+  }
+
+  50% {
+    color: rgba(255,255,255,0.2);
+  }
+  100% {
+    color: rgba(255,255,255,0);
+  }
+}
+
+@keyframes textgamma {
+  0% {
+    color: rgba(255,255,255,0);
+  }
+
+  50% {
+    color: rgba(255,255,255,0.2);
+  }
+  100% {
+    color: rgba(255,255,255,0);
+  }
+}
+@-webkit-keyframes textzero {
+  0% {
+    color: rgba(255,255,255,0.6);
+  }
+
+  50% {
+    color: rgba(255,255,255,0.1);
+  }
+  100% {
+    color: rgba(255,255,255,0.6);
+  }
+}
+
+@keyframes textzero {
+  0% {
+    color: rgba(255,255,255,0.6);
+  }
+
+  50% {
+    color: rgba(255,255,255,0.1);
+  }
+  100% {
+    color: rgba(255,255,255,0.6);
+  }
+}
+.fadeInUp {
+  -webkit-animation: fadeinup 1s ; /* Safari 4+ */
+  animation:         fadeinup 1s ; /* IE 10+ */
+  animation-fill-mode:both;
+  -webkit-animation-fill-mode:both; /* Safari and Chrome */
+  animation-delay:500ms;
+  -webkit-animation-delay: 500ms; 
+
+}
+.text-alpha {
+  -webkit-animation: textalpha 5s infinite; /* Safari 4+ */
+  animation:         textalpha 5s infinite; /* IE 10+ */
+  animation-fill-mode:both;
+  -webkit-animation-fill-mode:both; /* Safari and Chrome */   
+}
+.text-beta {
+  -webkit-animation: textbeta 4s infinite; /* Safari 4+ */
+  animation:         textbeta 4s infinite; /* IE 10+ */
+  animation-fill-mode:both;
+  -webkit-animation-fill-mode:both; /* Safari and Chrome */   
+  animation-delay:500ms;
+  -webkit-animation-delay: 500ms; 
+}
+.text-gamma {
+  -webkit-animation: textgamma 4s infinite; /* Safari 4+ */
+  animation:         textgamma 4s infinite; /* IE 10+ */
+  animation-fill-mode:both;
+  -webkit-animation-fill-mode:both; /* Safari and Chrome */   
+}
+.text-zero {
+  -webkit-animation: textzero 6s infinite; /* Safari 4+ */
+  animation:         textzero 6s infinite; /* IE 10+ */
+  animation-fill-mode:both;
+  -webkit-animation-fill-mode:both; /* Safari and Chrome */   
+  animation-delay:500ms;
+  -webkit-animation-delay: 500ms; 
 }
 /* ==========================================================================
    Helper classes

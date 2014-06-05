@@ -43,9 +43,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
             postRender: function () {
                 shareInfo.title = this.user.get("userName") + ":" + shareInfo.title;
                 shareInfo.shareTimelineTitle = this.user.get("userName") + ":"  + shareInfo.shareTimelineTitle;
-                if ( !this.user.get("isMale") ) {
-                    shareInfo.img_url = "http://quiz.seemeloo.com:908/app/img/W.png";
-                }
+                shareInfo.img_url = this.user.get("headImageUrl");
                 _hmt.push(['_trackPageview', "/start"]);
             },
             beforeRender: function() {
@@ -73,10 +71,6 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
                 shareInfo.shareTimelineTitle = shareInfo.title + shareInfo.desc;
                 shareInfo.link = window.location.href;
 
-                if (!titleText.useDefaultImg) {
-                    shareInfo.img_url = this.user.get("headImageUrl");
-                }
-                console.log(this.user.toJSON());
                 this.$el.find("#startContent").html(Mustache.render(successTemplate, this.user.toJSON()));
             },
             showShareOverlay: function () {
