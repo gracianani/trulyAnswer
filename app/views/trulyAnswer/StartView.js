@@ -46,6 +46,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
                 if ( !this.user.get("isMale") ) {
                     shareInfo.img_url = "http://quiz.seemeloo.com:908/app/img/W.png";
                 }
+                _hmt.push(['_trackPageview', "/start"]);
             },
             beforeRender: function() {
                 var sex = this.user.get("sex");
@@ -64,8 +65,8 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
                 }
             },
             showSuccessInfo: function() {
-                var titleText = Configs.titleTexts[0];
-                var descText = Configs.descTexts[0];
+                var titleText = Utils.getRandomItemFromArray(Configs.titleTexts);
+                var descText = Utils.getRandomItemFromArray(Configs.descTexts);
                 
                 shareInfo.title = titleText.titleBefore + this.user.get("userName") + titleText.titleAfter;
                 shareInfo.desc = descText.descBefore + this.question.get("expiresIn") + descText.descAfter;
@@ -101,7 +102,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
             },
             onFocusInput: function(ev) {
                 this.$el.find(".form-group").removeClass("has-error");
-                this.$el.find(".control-label").text("输入有效时间，马上开始有问必答");
+                this.$el.find(".control-label").text("我承诺在以下时间内，朋友问我什么我都回答");
             },
             onBlurInput: function(ev) {
                 
@@ -115,7 +116,8 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
                     success: function (data) {                   
                         self.shareCode = data.shareCode;
                         Backbone.history.navigate("trulyAnswer/reply/" + data.shareCode, { trigger: false, replace: true });
-                        self.showSuccessInfo();
+                        self.showShareOverlay();
+                        //self.showSuccessInfo();
     
                 },
                 error: function (msg) {

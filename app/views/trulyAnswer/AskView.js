@@ -39,9 +39,10 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
                                 self.question.set({
                                     "QuestionTips": Utils.shufferArray(Configs.QuestionTips)
                                 });
+                                console.log(self.user.get("subscribe"));
         
                                 self.question.set({
-                                    "isSubscribe": (self.user.subscribe !== 0 )
+                                    "isSubscribe": (self.user.get("subscribe")===0?false:true )
                                 });
 
                                 self.render();
@@ -88,6 +89,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Ask.html",
                     shareInfo.img_url = this.question.get("headImageUrl");
                 }
                 this.startCountDown();
+                _hmt.push(['_trackPageview', "/ask"]);
             },
             beforeRender: function() {
                 var remainingTime = this.question.get("ExpiresInSeconds");

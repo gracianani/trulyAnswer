@@ -99,6 +99,7 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Reply.html
                     shareInfo.img_url = this.user.get("headImageUrl");
                 }
                 this.startCountDown();
+                _hmt.push(['_trackPageview', "/reply"]);
             },
             beforeRender: function() {
                 var remainingTime = this.question.get("ExpiresInSeconds");

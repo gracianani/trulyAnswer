@@ -3,7 +3,7 @@ define(function () {
         "titleTexts" : [
             {
                 "titleBefore" : "",
-                "titleAfter" : ": 曾对哪个朋友动过心？",
+                "titleAfter" : ": 问我什么都会回答哦",
                 "useDefaultImg" : true
                 
             },
@@ -33,19 +33,19 @@ define(function () {
         "descTexts" : [
             {
                 "descBefore": "",
-                "descAfter" : "小时内Ta有问必答！"
+                "descAfter" : "小时内有问必答！"
             },
             {
                 "descBefore": "",
-                "descAfter" : "小时内Ta有问必答！还有什么犀利问题，抓紧问哦！"
+                "descAfter" : "小时内有问必答！还有什么犀利问题，抓紧问哦！"
             },
             {
                 "descBefore": "",
-                "descAfter" : "小时内Ta一定会回答！千载难逢的八卦机会。"
+                "descAfter" : "小时内一定会回答！千载难逢的八卦机会。"
             },
             {
                 "descBefore": "",
-                "descAfter" : "小时内Ta一定会回答！还有什么阴暗的问题，抓紧问哦！"                
+                "descAfter" : "小时内一定会回答！还有什么阴暗的问题，抓紧问哦！"                
             }
 
         ],
@@ -113,6 +113,14 @@ define(function () {
             {
                 "id":17,
                 "text": "你现在有喜欢的人么？"
+            },
+            {
+                "id":18,
+                "text": "你的真实体重是多少？"
+            },
+            {
+                "id":19,
+                "text": "你的真实三围是多少？"
             }
         
         ]     

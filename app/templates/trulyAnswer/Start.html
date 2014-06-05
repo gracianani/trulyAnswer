@@ -1,28 +1,26 @@
-﻿<div id="start" class="container">
-<div id="start-cover">
-    {{#isMale}}
-    <img src="app/img/M.png" id="start-cover-img" />
-    {{/isMale}}
-    {{^isMale}}
-    <img src="app/img/W.png" id="start-cover-img" />
-    {{/isMale}}
+﻿<div id="start">
+<div id="start-bg">
+    <div class="start-text">
+    你<span class="text-alpha">觉得</span><span class="text-beta">我</span>是一个<span class="text-beta">怎样</span><span class="text-alpha">的</span>人？你还<span class="text-gamma">单</span><span class="text-alpha">身</span><span class="text-beta">吗</span>？你<span class="text-alpha">不忙</span>的时候<span class="text-beta">喜欢</span><span class="text-alpha">做什</span><span class="text-gamma">么</span>？你<span class="text-beta">现在</span><span class="text-gamma">有喜</span>欢的<span class="text-beta">人</span><span class="text-alpha">么</span>？最近哭<span class="text-alpha">过么</span><span class="text-beta">？</span>告诉我<span class="text-gamma">你的</span><span class="text-alpha">真实体</span><span class="text-gamma">重</span><span class="text-beta">好么</span><span class="text-alpha">？</span><span class="text-alpha">上一</span><span class="text-gamma">次</span>约<span class="text-alpha">会是</span><span class="text-zero">什么</span><span class="text-beta">时</span>候？你<span class="text-alpha">和</span><span class="text-gamma">他</span><span class="text-beta">是怎</span>样<span class="text-beta">认识</span><span class="text-gamma">的</span><span class="text-beta">？</span>
+    </div>
+    <img src='{{headImageUrl}}' class="img-circle user-avatar"  />
 </div>
-<div id="startContent">
+<div id="startContent" class="container">
     <p id="start-intro">
     </p>
-    <p id="start-user" class="clearfix">
-        <img src='{{headImageUrl}}' class="img-circle user-avatar"  /> 
-        {{userName}}</p>
+    <div id="start-user" class="clearfix">
+        
+        <div>{{userName}}</div></div>
     <div class="form-group">
-    <label class="control-label" for="validThrough">输入有效时间，马上开始有问必答</label>
-    <div class="input-group input-group-lg" id="start-formgroup">
-          <input type="number" class="form-control" id="validThrough" name="validThrough" placeholder="有效时间" min="1" max="48" pattern="\d*"/>
+    <label class="control-label" for="validThrough">3小时内，朋友在此匿名提任何问题<br />我都会诚实回答</label>
+    <div class="input-group input-group-lg hidden" id="start-formgroup">
+          <input type="number" value="3" class="form-control" id="validThrough" name="validThrough" placeholder="请输入时间" min="1" max="48" pattern="\d*"/>
           <span class="input-group-addon">小时</span>
     </div>
     
     </div>
     
-    <a href="javascript:void(0)" id="confirmAndAsk" class="btn btn-block btn-lg btn-default" >开始</a>
+    <a href="javascript:void(0)" id="confirmAndAsk" class="btn btn-block btn-lg btn-default" >开始有问必答</a>
 
 
 </div>

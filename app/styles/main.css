@@ -103,6 +103,7 @@ textarea {
 html,body {
     width: 100%;
     height: 100%;
+    min-height: 100%;
     position: relative;
 }
 body {
@@ -111,6 +112,9 @@ body {
     font-family: "Microsoft Yahei", sans-serif;
     font-size: 14px;
     line-height: 1.4em;
+}
+#stage {
+padding-bottom: 90px;
 }
 a,.btn,.btn-link {
     color: #0abab5;
@@ -168,6 +172,40 @@ button, input, optgroup, select, textarea {
     width: 36px;
     border:1px solid #444;
 }
+#start-bg {
+    width: 100%;
+    height: 260px;
+    padding: 40px 0;
+    background:url(../../app/img/stars.jpg) center top;
+    background-size: 100% auto;
+    overflow: hidden;
+    position: relative;
+}
+#start-bg .user-avatar {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    margin-left: -30px;
+}
+.start-text {
+    font-size: 18px;
+    line-height: 30px;
+    color:rgba(255,255,255,0.7);;
+    padding: 0 2em;
+    height: 150px;
+    overflow: hidden;
+}
+.text-alpha {
+    color: rgba(255,255,255,0.2);
+}
+.text-beta {
+    color: rgba(255,255,255,0.4);
+}
+.text-gamma {
+    color: rgba(255,255,255,0);
+}
 #start-cover,#reply-cover {
     position: relative;
     width: 150px;
@@ -175,7 +213,7 @@ button, input, optgroup, select, textarea {
     margin-top: 10px;
 }
 #start-cover-img,#reply-cover-img {
-    width: 150px;
+    height: 150px;
 }
 #start-cover-avatar {
     position: absolute;
@@ -189,9 +227,8 @@ button, input, optgroup, select, textarea {
 }
 #start-user .user-avatar {
     border:1px solid #444;
-    width: 24px;  
-    position: relative;
-    top: -3px;  
+    width: 36px;
+    height: 36px; 
 }
 #start-formgroup {
     margin: 20px auto;
@@ -372,7 +409,7 @@ em {
     position: absolute;
     right: 10px;
     top: 50%;
-    margin-top:-25px;
+    margin-top:-30px;
 }
 #shareTips {
     text-align: left;
@@ -690,10 +727,10 @@ em {
 .startActivity {
     position: fixed;
     right: 10px;
-    bottom: -5px;
+    bottom: 55px;
     width: 70px;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 5px 5px 0 0;
     background-color: #444;
     color: #FFF;
     z-index: 1;
@@ -703,7 +740,35 @@ em {
 .btn-share,.restart {
     cursor: pointer;
 }
-
+#bottomAd {
+    display: block;
+    width: 100%;
+    height: 55px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    border-top: 1px solid #444;
+    padding-top: 5px;
+    color: #FFF;
+    background: #222;
+    text-decoration: none;
+    font-size: 14px;
+    overflow: hidden;
+}
+#bottomAd img {
+    max-height: 80%;
+    position:absolute;
+}
+#bottomAd .pull-left {
+    left: 10px;
+    top: 15%;
+    height: 70%;
+}
+#bottomAd .pull-right {
+    right: -5px;
+    top: 10%;
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */

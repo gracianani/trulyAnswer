@@ -11,6 +11,15 @@
   <!-- build:[href] /styles.min.css?v=1.10 -->
   <link rel="stylesheet" href="/app/styles/index.css">
   <!-- /build -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?cab11e76b722917b791d001f9d3c2733";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
 </head>
 
 <body>
@@ -24,10 +33,12 @@
     <img id="downloadArrow" src="app/img/overlayarrow.gif" />
     </div>
     <div id="downloadContent">
+        <p>让朋友们来提问吧！</p>
+        
         <p>1. 点击右上角的分享按钮 <br /><img src="app/img/shareicon.jpg" width="26px"/></p>
         
         <p>2. 在展开的选项中，<br />点击「分享到朋友圈」或 「分享给朋友」<br /> <img src="app/img/openinsafari.png" width="155px" style="padding-top:10px"/></p>
-        <p>神奇的事情就会发生...</p>
+        
     </div>
     
   </div>
@@ -36,6 +47,7 @@
     <div class="loading-img"><img src="app/img/logo-foxhole.gif" /></div>
     <div class="loading-info">秘密在努力的加载<br /> (ง •̀_•́)ง</div>
   </div><!-- loading -->
+
   <script>
     document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
         WeixinJSBridge.call('showOptionMenu');
