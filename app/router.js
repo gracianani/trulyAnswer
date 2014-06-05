@@ -98,10 +98,10 @@ define(function (require, exports, module) {
                 success: function () {
                     if (shareCode !== undefined && shareCode !== null) {
                         switch (questionTypeId) {
-                            case 1:
+                            case '1':
                                 Backbone.history.navigate("trulyAnswer/ask/" + shareCode, { trigger: true, replace: true });
                                 return;
-                            case 3:
+                            case '3':
                                 Backbone.history.navigate("shareStory/ask/" + shareCode, { trigger: true, replace: true });
                                 return;
                             default:
