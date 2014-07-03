@@ -45,7 +45,7 @@
   
   <div id="loading">
     <div class="loading-img"><img src="app/img/logo-foxhole.gif" /></div>
-    <div class="loading-info">秘密在努力的加载<br /> (ง •̀_•́)ง</div>
+    <div class="loading-info">匿名, 匿名, 匿名...<br /> (ง •̀_•́)ง</div>
   </div><!-- loading -->
 
   <script>
@@ -54,7 +54,6 @@
         document.getElementsByTagName('body')[0].setAttribute("class", "wechat");
     });
     var shareInfo = shareInfo || {
-        "appid": "wxb7f74b81b6e5ef76",
         "title": "问我什么我都会回答哦",
         "desc": "1小时内有问必答，谨慎点击。",
         "img_url":"http://quiz.seemeloo.com:908/app/img/M.png",
@@ -65,11 +64,13 @@
     };
 
     function shareFriend() {
+        shareInfo.link = window.location.href;
         WeixinJSBridge.invoke('sendAppMessage',shareInfo, function(res) {
             //_report('send_msg', res.err_msg);
         })
     }
     function shareTimeline() {
+        shareInfo.link = window.location.href;
         WeixinJSBridge.invoke('shareTimeline',{
         "img_url": shareInfo.img_url,
         "img_width": shareInfo.img_width,

@@ -115,8 +115,8 @@ define(["jquery", "backbone", "mustache", "text!templates/trulyAnswer/Start.html
                 this.question.addQuestion({
                     success: function (data) {                   
                         self.shareCode = data.shareCode;
-                        Backbone.history.navigate("trulyAnswer/reply/" + data.shareCode, { trigger: false, replace: true });
-                        self.showShareOverlay();
+                        Backbone.history.navigate("trulyAnswer/reply/" + data.shareCode, { trigger: true, replace: true });
+                        //self.showShareOverlay();
                         //self.showSuccessInfo();
     
                 },
